@@ -18,6 +18,8 @@ body {
     align-items: flex-start;
     width: 100%;
     padding: 20px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: calc(100vh - 50px); /* Adjust max height to fit within viewport */
 }
 
 .character {
@@ -81,8 +83,8 @@ body {
 }
 
 .description {
-    margin: 20px 0;
-    text-align: center;
+    margin: auto 0; /* Center the description vertically */
+    text-align: center; /* Align text to the left */
     font-style: italic;
     word-wrap: break-word; /* Ensures words will wrap */
     width: 100%; /* Ensures the text stays within the character container */
