@@ -2,11 +2,9 @@ from app import app
 from flask import render_template
 from flask import render_template, request, jsonify
 
-@app.route("/")
+@app.route("/", methods = ["GET", "POST"])
 def home_page():
-    user = {'username': 'John Doe'}
-    color = request.args.get('color', 'white')
-    return render_template('home.html', title='Home', user=user, color=color)
+    return render_template('main_screen.html', title='Home')
 
 @app.route('/change_color', methods=["GET"])
 def change_color():

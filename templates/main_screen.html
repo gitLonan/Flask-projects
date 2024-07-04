@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/main_menu.css') }}">
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='background.png') }}') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <h1>Main Menu</h1>
+        <a href="/choose_character"> 
+            <button class="menu-button">Start Game</button></a>
+        <a href="/character-creation"> 
+            <button class="menu-button">Create Character</button></a>
+        <a href="/options"> 
+            <button class="menu-button">Options</button></a>
+        <a href="/difficulty"> 
+            <button class="menu-button">Difficulty</button></a>
+        <a href="/quit"> 
+            <button class="menu-button">Quit</button></a>
+    </div>
+</body>
+</html>
