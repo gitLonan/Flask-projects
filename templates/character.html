@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{{ title or "Character Fight" }}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/character_style.css') }}">
+        <style>
+            body {
+                background: url('{{ url_for('static', filename='background.png') }}') no-repeat center center fixed;
+                background-size: cover;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="character">
+                <h2>{{ character1.name }}</h2>
+                <ul class="stats">
+                    <li>Strength: {{ character1.str }}</li>
+                    <li>Agility: {{ character1.agi }}</li>
+                    <li>Intelligence: {{ character1.int }}</li>
+                    <li>HP: {{ character1.hp }}</li>
+                </ul>
+                <div class="description">
+                    <p>{{ character1.description }}</p>
+                </div>
+            </div>
+            <div class="character">
+                <h2>{{ character2.name }}</h2>
+                <ul class="stats">
+                    <li>Strength: {{ character2.str }}</li>
+                    <li>Agility: {{ character2.agi }}</li>
+                    <li>Intelligence: {{ character2.int }}</li>
+                    <li>HP: {{ character2.hp }}</li>
+                </ul>
+                <div class="description">
+                    <p>{{ character2.description }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="fight-button">
+            <form action="/fight" method="POST">
+                <button type="submit">Fight</button>
+            </form>
+        </div>
+    </body>
+</html>

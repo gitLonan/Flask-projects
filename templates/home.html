@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - Color Changer</title>
+        {% else %}
+        <title>Color Changer</title>
+        {% endif %}
+        <style>
+            body {
+                background-color: {{ color or "white" }};
+            }
+        </style>
+    </head>
+    <body>
+        <a href="/choose_character" class="link">Choose Character</a>
+        <h1>Hello, {{ user.username }}!</h1>
+        <form action="/change_color" method="GET">
+            <button type="submit" name="color" value="red">Red</button>
+            <button type="submit" name="color" value="green">Green</button>
+            <button type="submit" name="color" value="blue">Blue</button>
+        </form>
+    </body>
+</html>
