@@ -6,4 +6,4 @@ app = Flask(__name__, static_folder='assets')
 app.config.from_object(Config)
 app.static_folder = app.config['STATIC_FOLDER']
 
-from app import routes
+from app import routes, stats_generator

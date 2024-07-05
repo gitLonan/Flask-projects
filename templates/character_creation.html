@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stats Screen</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/character_creation.css') }}">
+</head>
+<body>
+    <div class="stats-container">
+        <div class="points-available">
+            Points available to spend: <span class="points-number">{{ character.POINTS }}</span>
+        </div>
+        <div class="stat">
+            <div class="stat-name">Strength</div>
+            <div class="stat-number-container">
+                <div class="stat-number">{{ character.STRENGTH }}</div>
+                <button class="add-button">+
+                    <form action="{{ url_for('add_stat') }}" method="POST" class="stat"></form>
+                </button>
+            </div>
+        </div>
+        <div class="stat">
+            <div class="stat-name">Agility</div>
+            <div class="stat-number-container">
+                <div class="stat-number">{{ character.AGILITY }}</div>
+                <button class="add-button">+</button>
+            </div>
+        </div>
+        <div class="stat">
+            <div class="stat-name">Intelligence</div>
+            <div class="stat-number-container">
+                <div class="stat-number">{{ character.INTELLIGENCE }}</div>
+                <button class="add-button">+</button>
+            </div>
+        </div>
+        <div class="stat">
+            <div class="stat-name">HP</div>
+            <div class="stat-number-container">
+                <div class="stat-number">{{ character.HP }}</div>
+                <button class="add-button">+</button>
+            </div>
+        </div>
+        <div class="stat">
+            <div class="stat-name">Wisdom</div>
+            <div class="stat-number-container">
+                <div class="stat-number">{{ character.WISDOM }}</div>
+                <button class="add-button">+</button>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
