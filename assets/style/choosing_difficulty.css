@@ -1,0 +1,119 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Trebuchet MS', sans-serif;
+    background-color: #2c2c2c;
+    color: #f5f5f5;
+    text-align: center;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+}
+
+.difficulty-menu, .tips-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border: 2px solid #17bf44;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+    margin-top: 0;
+    color: #ffd700;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column; /* Changed to column for vertical alignment */
+    align-items: center;
+    margin-top: 10px;
+    
+}
+
+.difficulty-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border: 2px solid #17bf44;
+    background-color: #333;
+    color: #ffd700;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.difficulty-button.selected {
+    background-color: #17bf44;
+    color: #333;
+}
+
+.difficulty-button:hover {
+    background-color: #17bf44;
+    color: #333;
+}
+.button-wrapper {
+    margin-bottom: 20px; /* Adds space between buttons */
+}
+
+#tip-content {
+    margin-bottom: 10px;
+    text-align: left;
+    white-space: pre-wrap; /* Preserves whitespace and new lines */
+}
+.difficulty-menu-container {
+    background-color: rgba(0, 0, 0, 0.5); /* Default background with some transparency */
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+.difficulty-baby {
+    background-color: rgba(255, 192, 203, 0.5); /* Light pink background for 'Baby' */
+}
+
+.difficulty-easy {
+    background-color: rgba(144, 238, 144, 0.5); /* Light green background for 'Easy' */
+}
+
+.difficulty-normal {
+    background-color: rgba(173, 216, 230, 0.5); /* Light blue background for 'Normal' */
+}
+
+.difficulty-hard {
+    background-color: rgba(255, 99, 71, 0.5); /* Light red background for 'Hard' */
+}
+
+
+
+.menu-button,
+.next-tip-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border: 2px solid #17bf44;
+    background-color: #333;
+    color: #ffd700;
+    border-radius: 10px;
+    margin-right: 10px; /* Adjust margin as needed */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-button:hover,
+.next-tip-button:hover {
+    background-color: #17bf44;
+    color: #333;
+}
+
+.next-tip-form {
+    display: inline-block; /* Ensures buttons are on the same line */
+}
