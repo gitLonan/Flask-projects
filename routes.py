@@ -14,7 +14,7 @@ def home_page():
     """ Renders the first page on the server"""
 
     character.avaliable = True
-    return render_template('main_screen.html', title='Home')
+    return render_template('main_menu/main_screen.html', title='Home')
 ##########################
 
 
@@ -30,7 +30,7 @@ def character_creation():
     
     text = non_combat_text.get_text('char_creation')
     
-    return render_template('character_creation.html', character = character, text=text)
+    return render_template('main_menu/character_creation/stats_creation.html', character = character, text=text)
 
 @app.route('/update_stat/<stat>/<action>', methods=["GET", 'POST'])
 def update_stat(stat=None, action=None): 
@@ -48,9 +48,18 @@ def update_stat(stat=None, action=None):
 @app.route('/reroll', methods=["POST"])
 def reroll():
     """Handles rerolling stats."""
+
     character.avaliable_random_gen = True
     return redirect(url_for('character_creation'))
+
+
+
+@app.route("/class_choice", methods = ["POST", "GET"])
+def choose_class():
+
+    return render_template("")
 ##############################################################
+
 
 ############ Set difficulty  #################################
 @app.route('/select_difficulty', methods=["POST", "GET"])
@@ -61,13 +70,15 @@ def select_difficulty():
         tips = non_combat_text.text
         character.current_difficulty = request.form.get('difficulty')
 
-    return render_template('difficulty_menu.html', selected_difficulty = character.current_difficulty, tip_content = tips)
+    return render_template('main_menu/difficulty_menu/difficulty_menu.html', selected_difficulty = character.current_difficulty, tip_content = tips)
 
 @app.route("/next_tip", methods=["POST"])
 def next_tip():
     if request.method == "POST":
         tips = non_combat_text.get_text('tips')
     return redirect(url_for("select_difficulty"))
+
+
 ########################################################
 @app.route("/choose_character")
 def characters():
@@ -86,5 +97,5 @@ def characters():
     ]
     if characters is None:
         return redirect(url_for("/"))
-    return render_template('character.html', title='Character Fight', characters=characters)
+    return render_template('main_menu/character.html', title='Character Fight', characters=characters)
     

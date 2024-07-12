@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Difficulty Menu</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style/choosing_difficulty.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/before_the_start/choosing_difficulty.css') }}">
     <style>
         body {
             background: url('{{ url_for('static', filename='background.png') }}') no-repeat center center fixed;
@@ -35,16 +35,17 @@
     </div>
 </div>
         
-        <div class="tips-container">
-            <h2>Tips</h2>
-            <div id="tip-content">{{ tip_content }}</div>
-            <a href="/main_screen"> 
-                <button class="menu-button">Back</button>
-            </a>
-            <form action="{{ url_for('next_tip') }}" method="POST">
-                <button type="submit" id="next-tip" class="next-tip-button">Next</button>
-            </form>
-        </div>
+    <div class="tips-container">
+        <h2>Tips</h2>
+        <div id="tip-content">{{ tip_content }}</div>
+            <div class="button-container">
+                <a href="/main_screen" class="menu-link">
+                    <button class="menu-button">Back</button>
+                </a>
+        <form action="{{ url_for('next_tip') }}" method="POST" class="next-tip-form">
+            <button type="submit" id="next-tip" class="next-tip-button">Next Tip</button>
+        </form>
     </div>
+</div>
 </body>
 </html>

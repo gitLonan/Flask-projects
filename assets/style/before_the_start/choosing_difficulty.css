@@ -94,7 +94,12 @@ h2 {
 }
 
 
-
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px; /* Adjust margin as needed */
+}
 .menu-button,
 .next-tip-button {
     padding: 10px 20px;
