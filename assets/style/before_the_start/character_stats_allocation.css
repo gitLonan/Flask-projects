@@ -64,6 +64,7 @@ body {
     display: flex;
     align-items: center;
     width: 70%;
+    justify-content: space-between; /* Ensures equal spacing between children */
 }
 
 .stat-number {
@@ -73,9 +74,10 @@ body {
     border-radius: 10px;
     background-color: #333;
     color: #ffd700;
-    margin-right: 10px;
+    margin-right: 0px;
     width: 50px;
     text-align: center;
+   
 }
 
 .add-button {

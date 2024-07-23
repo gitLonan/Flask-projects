@@ -1,7 +1,9 @@
 from app import app
 from flask import render_template, redirect, url_for, request
-from app import character
+from app import stats
 from app import non_combat_text
+from app import stats_generator, treshold, create_class_instance
+from app.character_classes import Character
 import typing
 import random
 
@@ -13,7 +15,7 @@ import random
 def home_page():
     """ Renders the first page on the server"""
 
-    character.avaliable = True
+    stats.avaliable = True
     return render_template('main_menu/main_screen.html', title='Home')
 ##########################
 
@@ -23,14 +25,14 @@ def home_page():
 def character_creation():
     """ When clicked 'create character' in the menu screen, redirects to the first phase, that is stats alocation """
 
-    if character.avaliable_random_gen == True:
-        character.get_random_stats()
-        character.apply_difficulty()
-        character.avaliable_random_gen = False
+    if stats.avaliable_random_gen == True:
+        stats.get_random_stats()
+        stats.apply_difficulty()
+        stats.avaliable_random_gen = False
     
     text = non_combat_text.get_text('char_creation')
     
-    return render_template('main_menu/character_creation/stats_creation.html', character = character, text=text)
+    return render_template('main_menu/character_creation/stats_creation.html', character = stats, text=text)
 
 @app.route('/update_stat/<stat>/<action>', methods=["GET", 'POST'])
 def update_stat(stat=None, action=None): 
@@ -38,27 +40,63 @@ def update_stat(stat=None, action=None):
     
     print(f"Received action: {action} for stat: {stat}")
     if action == "increment":
-        if hasattr(character, stat):
-            character.update(stat,action)
+        if hasattr(stats, stat):
+            stats.update(stat,action)
     elif action == "decrement":
-        if hasattr(character, stat):
-            character.update(stat, action)
+        if hasattr(stats, stat):
+            stats.update(stat, action)
     return redirect(url_for('character_creation'))
+
 
 @app.route('/reroll', methods=["POST"])
 def reroll():
     """Handles rerolling stats."""
 
-    character.avaliable_random_gen = True
+    stats.avaliable_random_gen = True
     return redirect(url_for('character_creation'))
 
 
 
-@app.route("/class_choice", methods = ["POST", "GET"])
-def choose_class():
+@app.route('/available_class', methods = ["POST", "GET"])
+def treshold_for_classes():
 
-    return render_template("")
+    return redirect(url_for("choose_class"))
+
+
+
+@app.route('/choose_class', methods = ["POST", "GET"])
+def choose_class():
+    
+    
+    character = Character(stats.STRENGTH, stats.AGILITY, stats.INTELLIGENCE, stats.WISDOM, stats.CONSTITUTION)
+    
+    classes = treshold.get_list_of_available_classes(character)
+    print("ovo gledam", classes)
+    
+    selected_class_string = ''
+    selected_description = character.description
+    descriptions = ''
+    if request.method == "POST":
+        selected_class_string = request.form.get('class', default="")
+        print(selected_class_string)
+        selected_class_object = create_class_instance(selected_class_string, stats.STRENGTH, stats.AGILITY, stats.INTELLIGENCE, stats.WISDOM, stats.CONSTITUTION)
+        selected_description = selected_class_object.description
+        print(vars(selected_class_object), selected_description)
+    return render_template("main_menu/character_creation/class_choice.html",
+                             available_classes = classes,
+                             class_description = selected_description,
+                             physical_attack = character.physical_attack,
+                             magic_attack = character.magical_attack,
+                             physical_defense = character.physical_defense,
+                             magical_defense = character.magical_defense,
+                             health = character.hp,
+                             speed = character.speed,
+                             selected_class=selected_class_string
+                             )
+
 ##############################################################
+
+
 
 
 ############ Set difficulty  #################################
@@ -68,9 +106,9 @@ def select_difficulty():
         tips = non_combat_text.get_text('tips')
     if request.method == "POST":
         tips = non_combat_text.text
-        character.current_difficulty = request.form.get('difficulty')
+        stats.current_difficulty = request.form.get('difficulty')
 
-    return render_template('main_menu/difficulty_menu/difficulty_menu.html', selected_difficulty = character.current_difficulty, tip_content = tips)
+    return render_template('main_menu/difficulty_menu/difficulty_menu.html', selected_difficulty = stats.current_difficulty, tip_content = tips)
 
 @app.route("/next_tip", methods=["POST"])
 def next_tip():
@@ -87,12 +125,12 @@ def characters():
     """
 
     characters = [
-        {'name': 'Character 1', 'str': 10, 'agi': 8, 'int': 7, 'hp': 100, "wisdom": 9, 'description': 'A brave warrior from the east. Fighting to survive in this lands', 'image': 'character1.png'},
-        {'name': 'Character 2', 'str': 7, 'agi': 10, 'int': 9, 'hp': 80, 'description': 'A swift rogue.', 'image': 'character2.png'},
-        {'name': 'Character 1', 'str': 10, 'agi': 8, 'int': 7, 'hp': 100, 'description': 'A brave warrior from the east. Fighting to survive in this lands', 'image': 'character1.png'},
-        {'name': 'Character 2', 'str': 7, 'agi': 10, 'int': 9, 'hp': 80, 'description': 'A brave warrior from the east. Fighting to survive in this lands', 'image': 'character1.png', 'image': 'character2.png'},
-        {'name': 'Character 1', 'str': 10, 'agi': 8, 'int': 7, 'hp': 100, 'description': 'A brave warrior from the east. Fighting to survive in this lands', 'image': 'character1.png'},
-        {'name': 'Character 2', 'str': 7, 'agi': 10, 'int': 9, 'hp': 80, 'description': 'A swift rogue.', 'image': 'character2.png'},
+        {'name': 'Character 1', 'str': 10, 'agi': 8, 'int': 7, 'con': 100, "wisdom": 9, 'description': 'A brave warrior from the east. Fighting to survive in this lands', 'image': 'character1.png'},
+        {'name': 'Character 2', 'str': 7, 'agi': 10, 'int': 9, 'con': 80, 'description': 'A swift rogue.', 'image': 'character2.png'},
+        {'name': 'Character 1', 'str': 10, 'agi': 8, 'int': 7, 'con': 12, 'description': 'A brave warrior from the east. Fighting to survive in this lands', 'image': 'character1.png'},
+        {'name': 'Character 2', 'str': 7, 'agi': 10, 'int': 9, 'con': 80, 'description': 'A brave warrior from the east. Fighting to survive in this lands', 'image': 'character1.png', 'image': 'character2.png'},
+        {'name': 'Character 1', 'str': 10, 'agi': 8, 'int': 7, 'con': 1000, 'description': 'A brave warrior from the east. Fighting to survive in this lands', 'image': 'character1.png'},
+        {'name': 'Character 2', 'str': 7, 'agi': 10, 'int': 9, 'con': 80, 'description': 'A swift rogue.', 'image': 'character2.png'},
         # Add more characters here
     ]
     if characters is None:

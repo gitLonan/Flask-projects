@@ -22,65 +22,70 @@
             <div class="stat">
                 <div class="stat-name">Strength</div>
                 <div class="stat-number-container">
+                    <form action="{{ url_for('update_stat', stat='STRENGTH', action='decrement') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">-</button>
+                    </form>
                     <div class="stat-number">{{ character.STRENGTH }}</div>
                     <form action="{{ url_for('update_stat', stat='STRENGTH', action='increment') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">+</button>
                     </form>
-                    <form action="{{ url_for('update_stat', stat='STRENGTH', action='decrement') }}" method="POST" class="inline-form">
-                        <button type="submit" class="add-button">-</button>
-                    </form>
+                    
                 </div>
             </div>
 
             <div class="stat">
                 <div class="stat-name">Agility</div>
                 <div class="stat-number-container">
+                    <form action="{{ url_for('update_stat', stat='AGILITY', action='decrement') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">-</button>
+                    </form>
                     <div class="stat-number">{{ character.AGILITY }}</div>
                     <form action="{{ url_for('update_stat', stat='AGILITY', action='increment') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">+</button>
                     </form>
-                    <form action="{{ url_for('update_stat', stat='AGILITY', action='decrement') }}" method="POST" class="inline-form">
-                        <button type="submit" class="add-button">-</button>
-                    </form>
+                    
                 </div>
             </div>
 
             <div class="stat">
                 <div class="stat-name">Intelligence</div>
                 <div class="stat-number-container">
+                    <form action="{{ url_for('update_stat', stat='INTELLIGENCE', action='decrement') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">-</button>
+                    </form>
                     <div class="stat-number">{{ character.INTELLIGENCE }}</div>
                     <form action="{{ url_for('update_stat', stat='INTELLIGENCE', action='increment') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">+</button>
                     </form>
-                    <form action="{{ url_for('update_stat', stat='INTELLIGENCE', action='decrement') }}" method="POST" class="inline-form">
-                        <button type="submit" class="add-button">-</button>
-                    </form>
+                    
                 </div>
             </div>
 
             <div class="stat">
-                <div class="stat-name">HP</div>
+                <div class="stat-name">Constitution</div>
                 <div class="stat-number-container">
-                    <div class="stat-number">{{ character.HP }}</div>
-                    <form action="{{ url_for('update_stat', stat='HP', action='increment') }}" method="POST" class="inline-form">
-                        <button type="submit" class="add-button">+</button>
-                    </form>
-                    <form action="{{ url_for('update_stat', stat='HP', action='decrement') }}" method="POST" class="inline-form">
+                    <form action="{{ url_for('update_stat', stat='CONSTITUTION', action='decrement') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">-</button>
                     </form>
+                    <div class="stat-number">{{ character.CONSTITUTION }}</div>
+                    <form action="{{ url_for('update_stat', stat='CONSTITUTION', action='increment') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">+</button>
+                    </form>
+                    
                 </div>
             </div>
 
             <div class="stat">
                 <div class="stat-name">Wisdom</div>
                 <div class="stat-number-container">
+                    <form action="{{ url_for('update_stat', stat='WISDOM', action='decrement') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">-</button>
+                    </form>
                     <div class="stat-number">{{ character.WISDOM }}</div>
                     <form action="{{ url_for('update_stat', stat='WISDOM', action='increment') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">+</button>
                     </form>
-                    <form action="{{ url_for('update_stat', stat='WISDOM', action='decrement') }}" method="POST" class="inline-form">
-                        <button type="submit" class="add-button">-</button>
-                    </form>
+                    
                 </div>
             </div>
         </div>
@@ -98,7 +103,7 @@
         <div>
             <a href="/main_screen">
             <button class="back-button">Back</button></a>
-            <a href="/class_choice"></a>
+            <a href="/available_class">
             <button class="next-button">Next</button></a>
         </div>
     </div>

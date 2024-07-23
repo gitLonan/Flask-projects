@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/before_the_start/class_chooser.css') }}">
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='background.png') }}') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="icon-container">
+            {% for icon in available_icons %}
+                <div class="icon-wrapper {% if selected_icon == icon %}selected-icon{% endif %}">
+                    <form action="{{ url_for('select_icon') }}" method="POST" class="inline-form">
+                        <button type="submit" name="icon" value="{{ icon }}" class="icon-button">
+                            <img src="{{ url_for('static', filename='icons/' + icon + '.png') }}" alt="{{ icon }}" class="icon">
+                        </button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="class-selection">
+            {% for class in available_classes %}
+                <form action="{{ url_for('choose_class') }}" method="POST" class="class-form">
+                    <input type="hidden" name="selected_class" value="{{ selected_class }}">
+                    <button type="submit" name="class" value={{class}} class="class-button {% if selected_class == class %}selected{% endif %}">
+                        {{ class }}
+                    </button>
+                </form>
+            {% endfor %}
+        </div>
+
+        <div class="info-container">
+            <textarea placeholder="Enter your description here..."></textarea>
+            <div class="class-description">
+                <h3>Class Description</h3>
+                <p>{{ class_description }}</p>
+            </div>
+            <div class="derived-stats">
+                <h3>Derived Stats</h3>
+                <div class="stat">
+                    <img src="{{ url_for('static', filename='icons/physical attack.jpg') }}" alt="Physical Attack" class="stat-icon">
+                    <span>Physical Attack: {{ physical_attack }}</span>
+                </div>
+                <div class="stat">
+                    <img src="{{ url_for('static', filename='icons/magical attack.jpg') }}" alt="Magic Attack" class="stat-icon">
+                    <span>Magic Attack: {{ magic_attack }}</span>
+                </div>
+                <div class="stat">
+                    <img src="{{ url_for('static', filename='icons/physical defense.jpg') }}" alt="Physical Defense" class="stat-icon">
+                    <span>Physical Defense: {{ physical_defense }}</span>
+                </div>
+                <div class="stat">
+                    <img src="{{ url_for('static', filename='icons/magical defense.jpg') }}" alt="Magical Defense" class="stat-icon">
+                    <span>Magical Defense: {{ magical_defense }}</span>
+                </div>
+                <div class="stat">
+                    <img src="{{ url_for('static', filename='icons/health.jpg') }}" alt="Health" class="stat-icon">
+                    <span>Health: {{ health }}</span>
+                </div>
+                <div class="stat">
+                    <img src="{{ url_for('static', filename='icons/speed.jpg') }}" alt="Speed" class="stat-icon">
+                    <span>Speed: {{ speed }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
