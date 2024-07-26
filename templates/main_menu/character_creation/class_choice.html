@@ -17,15 +17,16 @@
         <div class="icon-container">
             {% for icon in available_icons %}
                 <div class="icon-wrapper {% if selected_icon == icon %}selected-icon{% endif %}">
-                    <form action="{{ url_for('select_icon') }}" method="POST" class="inline-form">
+                    <form action="{{ url_for('choose_class') }}" method="POST" class="inline-form">
                         <button type="submit" name="icon" value="{{ icon }}" class="icon-button">
-                            <img src="{{ url_for('static', filename='icons/' + icon + '.png') }}" alt="{{ icon }}" class="icon">
+                            <input type="hidden" name="selected_class" value="{{ selected_class }}">
+                            <img src="{{ url_for('static', filename='classes/' + selected_class + '/' + icon + '.png') }}" alt="{{ icon }}" class="icon">
                         </button>
                     </form>
                 </div>
             {% endfor %}
         </div>
-
+        
         <div class="class-selection">
             {% for class in available_classes %}
                 <form action="{{ url_for('choose_class') }}" method="POST" class="class-form">
@@ -69,8 +70,19 @@
                     <img src="{{ url_for('static', filename='icons/speed.jpg') }}" alt="Speed" class="stat-icon">
                     <span>Speed: {{ speed }}</span>
                 </div>
+                
             </div>
+            
         </div>
+        
+    </div>
+    <div class="navigation-buttons">
+        <a href="/character_creation" class="navigation-button">
+            <button class="nav-button">Back</button>
+        </a>
+        <a href="/main_screen" class="navigation-button">
+            <button class="nav-button">Next</button>
+        </a>
     </div>
 </body>
 </html>

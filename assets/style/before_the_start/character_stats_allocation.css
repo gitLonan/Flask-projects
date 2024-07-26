@@ -148,3 +148,10 @@ body {
     background-color: #17bf44;
     color: #333;
 }
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between; /* Aligns buttons with space in between */
+    align-items: center;
+    width: 50%; /* Occupy full width of stats-container */
+    margin-top: 20px;
+}

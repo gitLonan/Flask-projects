@@ -8,8 +8,8 @@ class Treshold():
 
     def __init__(self):
 
-        self.classes = {"Knight": {"str": 10},
-                        "Rouge": {"agi": 14}
+        self.classes = {"Knight": {"str": 10, "agi": 14},
+                        "Rouge": {"agi": 14},
                         
                         }
 
@@ -19,11 +19,17 @@ class Treshold():
         above_treshold = []
 
         for class_name, stats in self.classes.items():
-            #print("ovo gledam", class_name)
+            token = len(stats)
+            print("OVO JE TOKEN", token)
             for stat, value in self.classes[class_name].items():
                 current_stat = getattr(character, stat)
-                print("current stats", current_stat)
-                if current_stat > value:
+                
+                if not current_stat > value:
+                    print(stat, value)
+                    token -= 1
+                    continue    
+            
+            if token == len(stats):
                     above_treshold.append(class_name)
 
 

@@ -9,7 +9,7 @@ body {
     color: #f5f5f5;
     text-align: center;
 }
-/**/
+
 .container {
     display: flex;
     flex-direction: row;
@@ -18,8 +18,8 @@ body {
     align-items: flex-start;
     width: 100%;
     padding: 20px;
-    overflow-y: auto; /* Enable vertical scrolling */
-    max-height: calc(100vh - 50px); /* Adjust max height to fit within viewport */
+    overflow-y: auto;
+    max-height: calc(100vh - 50px);
 }
 
 .character {
@@ -29,24 +29,24 @@ body {
     border: 2px solid #ccc;
     border-radius: 15px;
     padding: 20px;
-    width: 45%;  /* Adjusted to make sure it fits within the container */
+    width: 45%;
     margin: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
-    box-sizing: border-box; /* Ensure padding is included in the width */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for smooth effect */
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .character:hover {
-    transform: scale(1.05); /* Slightly enlarge the container */
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); /* Highlight the container */
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
 }
 
 .character img.character-image {
-    flex-shrink: 0; /* Prevent image from shrinking */
-    width: 180px; /* Set the default width */
-    height: 180px; /* Set the default height */
+    flex-shrink: 0;
+    width: 180px;
+    height: 180px;
     margin-right: 20px;
     border-radius: 10px;
     border: 2px solid #ffd700;
@@ -56,13 +56,12 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex-grow: 1; /* Make the character-details container grow to fill the remaining space */
-    width: 0; /* Prevent width from exceeding available space */
-    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    flex-grow: 1;
+    width: 0;
+    box-sizing: border-box;
 }
 
 .character-button {
-    /* Ensure button fills the container */
     display: block;
     width: 100%;
     height: 100%;
@@ -73,11 +72,11 @@ body {
 }
 
 .character h2 {
-    text-align: center; /* Align text to the left */
+    text-align: center;
     margin: 0;
     font-size: 24px;
     color: #ffd700;
-    word-wrap: break-word; /* Ensure words wrap within the container */
+    word-wrap: break-word;
 }
 
 .stats {
@@ -93,40 +92,37 @@ body {
 }
 
 .description {
-    margin: auto 0; /* Center the description vertically */
-    text-align: center; /* Align text to the left */
+    margin: auto 0;
+    text-align: center;
     font-style: italic;
-    word-wrap: break-word; /* Ensures words will wrap */
-    width: 100%; /* Ensures the text stays within the character container */
-    box-sizing: border-box; /* Ensures padding and border are included in the width */
+    word-wrap: break-word;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .fight-button {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        position: fixed;
-        bottom: 20px;
-    }
-    
-button {
-        padding: 15px 30px;
-        font-size: 18px;
-        cursor: pointer;
-        border: 2px solid #ffd700;
-        background-color: #333;
-        color: #ffd700;
-        border-radius: 10px;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    
-button:hover {
-        background-color: #ffd700;
-        color: #333;
-    }
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: fixed;
+    bottom: 20px;
+}
 
-.class-button.selected {
-        background-color: #ffd700;
-        color: #333;
-        border: 2px solid #ffd700;
-    }
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    border: 2px solid #ffd700;
+    background-color: #333;
+    color: #ffd700;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ffd700;
+    color: #333;
+}
+
+
+

@@ -1,9 +1,9 @@
 from app import app
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, session
 from app import stats
 from app import non_combat_text
-from app import stats_generator, treshold, create_class_instance
-from app.character_classes import Character
+from app import stats_generator, treshold, create_class_instance, character, list_of_classes
+
 import typing
 import random
 
@@ -51,7 +51,6 @@ def update_stat(stat=None, action=None):
 @app.route('/reroll', methods=["POST"])
 def reroll():
     """Handles rerolling stats."""
-
     stats.avaliable_random_gen = True
     return redirect(url_for('character_creation'))
 
@@ -59,7 +58,10 @@ def reroll():
 
 @app.route('/available_class', methods = ["POST", "GET"])
 def treshold_for_classes():
-
+    character.session_remembering = {}
+    character.selected_class_string = ''
+    stats.setOriginalStats()
+    character.update_stats(stats)
     return redirect(url_for("choose_class"))
 
 
@@ -68,30 +70,58 @@ def treshold_for_classes():
 def choose_class():
     
     
-    character = Character(stats.STRENGTH, stats.AGILITY, stats.INTELLIGENCE, stats.WISDOM, stats.CONSTITUTION)
-    
     classes = treshold.get_list_of_available_classes(character)
-    print("ovo gledam", classes)
+    #this is soo that python doesnt make thousands of instances of classes when user selects different ones +
+    #when i add class specific stats this session remembers and i can just switch between instances of what was clicked
+     
     
-    selected_class_string = ''
-    selected_description = character.description
-    descriptions = ''
-    if request.method == "POST":
-        selected_class_string = request.form.get('class', default="")
-        print(selected_class_string)
-        selected_class_object = create_class_instance(selected_class_string, stats.STRENGTH, stats.AGILITY, stats.INTELLIGENCE, stats.WISDOM, stats.CONSTITUTION)
-        selected_description = selected_class_object.description
-        print(vars(selected_class_object), selected_description)
+    
+    
+    selected_class_object = character
+
+    if request.method == "POST" and request.form.get('class'):
+        character.selected_class_string = request.form.get('class', default="")
+        print(character.selected_class_string)
+
+        if character.selected_class_string in character.session_remembering:
+            character.cookie = 1
+            stats.setOriginalStats()
+            character.update_stats(stats)
+            
+            selected_class_object = character.session_remembering[character.selected_class_string]
+            selected_class_object.add_class_specific_stats(character)
+            
+            
+            print(character.session_remembering)
+        else:
+            character.cookie = 1
+            selected_class_object = create_class_instance(character.selected_class_string, stats.STRENGTH, stats.AGILITY, stats.INTELLIGENCE, stats.WISDOM, stats.CONSTITUTION)
+            character.session_remembering[character.selected_class_string] = selected_class_object
+            stats.setOriginalStats()
+            character.update_stats(stats)
+            selected_class_object.add_class_specific_stats(character)
+            print(character.session_remembering)
+
+    if request.method == "POST" and request.form.get('icon'):
+        #print("ASDSAD", character.session_remembering,character.selected_class_string,character.session_remembering[character.selected_class_string])
+        selected_class_object = character.session_remembering[character.selected_class_string]
+        character.selected_icon = request.form.get('icon')
+        
+
+
+
     return render_template("main_menu/character_creation/class_choice.html",
                              available_classes = classes,
-                             class_description = selected_description,
+                             class_description = selected_class_object.description,
                              physical_attack = character.physical_attack,
                              magic_attack = character.magical_attack,
                              physical_defense = character.physical_defense,
                              magical_defense = character.magical_defense,
                              health = character.hp,
                              speed = character.speed,
-                             selected_class=selected_class_string
+                             selected_class=character.selected_class_string,
+                             available_icons = selected_class_object.get_icon_assets(),
+                             selected_icon = character.selected_icon
                              )
 
 ##############################################################
