@@ -1,4 +1,4 @@
-from app.character_classes import Character, Knight, Rouge
+
 
 
 class Treshold():
@@ -7,25 +7,22 @@ class Treshold():
         """
 
     def __init__(self):
-
-        self.classes = {"Knight": {"str": 10, "agi": 14},
-                        "Rouge": {"agi": 14},
-                        
+        self.classes = {"Knight": {"str": 10,},
+                        "Rouge": {"agi": 12},
+                        "Druid": {"wis": 12, "int": 12}
                         }
+
 
     def get_list_of_available_classes(self, character):
         """ returns available classes based on generated stats"""
-        #print(character.str)
-        above_treshold = []
 
+        above_treshold = []
         for class_name, stats in self.classes.items():
             token = len(stats)
-            print("OVO JE TOKEN", token)
+            
             for stat, value in self.classes[class_name].items():
                 current_stat = getattr(character, stat)
-                
-                if not current_stat > value:
-                    print(stat, value)
+                if not current_stat >= value:
                     token -= 1
                     continue    
             

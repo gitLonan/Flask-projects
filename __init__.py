@@ -6,8 +6,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from app.tresh_hold_for_classes import Treshold
 #from app.Utility.new_anotation_types import routing_url
-from app.character_classes import Knight, Rouge
+from app.character_classes import Knight, Rouge, Druid
 from app.character_classes import Character
+
 
 
 app = Flask(__name__, static_folder='assets')
@@ -17,15 +18,17 @@ app.static_folder = app.config['STATIC_FOLDER']
 stats = Stats()
 treshold = Treshold()
 non_combat_text = NonCombatText()
-character = Character(stats.STRENGTH, stats.AGILITY, stats.INTELLIGENCE, stats.WISDOM, stats.CONSTITUTION)
+character  = Character(stats.STRENGTH, stats.AGILITY, stats.INTELLIGENCE, stats.WISDOM, stats.CONSTITUTION)
 
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 migrate.init_app(app, db)
 
+
 list_of_classes = {"Knight": Knight,
-                       "Rouge": Rouge}
+                    "Rouge": Rouge,
+                    "Druid": Druid,}
 
 def create_class_instance(class_name, *args, **kwargs):
         """ Creates instance of the class that the player chose"""
@@ -35,6 +38,6 @@ def create_class_instance(class_name, *args, **kwargs):
             return selected_class_object(*args, **kwargs)
         return None
 
-from app import routes, stats_generator, stats, treshold, create_class_instance, character
-from app import non_combat_text, character_models
+from app import routes, stats_generator, stats, treshold, create_class_instance 
+from app import non_combat_text, character_models, character
 #from app import routing_url

@@ -2,8 +2,9 @@ import os
 
 
 class Character():
-    """ Super class for all classes: inside file: character_classes.py
-        """
+    """ Super class for all classes: inside file: character_classes.py"""
+
+
     def __init__(self, str, agi, int, wis, con):
         self.str = str
         self.agi = agi
@@ -14,8 +15,9 @@ class Character():
         self.high_coefficient = 1
         self.medium_coefficient = 0.7
         self.lower_coefficient = 0.3
-        self.description = " "
-        
+
+
+        self.description = ""
         self.selected_icon = ''
         self.selected_class_string = ""
         self.class_instance = None
@@ -94,6 +96,31 @@ class Rouge(Character):
     def get_icon_assets(self):
         cwd = os.getcwd()
         directory = os.path.dirname(f"{cwd}/app/assets/classes/Rouge/")
+        #print(directory)
+        list_of_icons = []
+        for name in os.listdir(directory):
+                list_of_icons.append(name[:-4])
+        return list_of_icons
+    
+    def get_description(self):
+        return self.description
+
+
+class Druid(Character):
+    def __init__(self, *args, **kwargs):
+        super().__init__( *args, **kwargs)
+
+        self.description = "KERUSA"
+        self.name = "Druid"
+
+    def add_class_specific_stats(self, character):
+        if character.cookie == 1:
+            character.magical_attack += 20
+            character.cookie = 0
+
+    def get_icon_assets(self):
+        cwd = os.getcwd()
+        directory = os.path.dirname(f"{cwd}/app/assets/classes/Druid/")
         #print(directory)
         list_of_icons = []
         for name in os.listdir(directory):

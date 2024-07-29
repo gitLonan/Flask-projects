@@ -39,11 +39,11 @@
         </div>
 
         <div class="info-container">
-            <textarea placeholder="Enter your description here..."></textarea>
-            <div class="class-description">
-                <h3>Class Description</h3>
-                <p>{{ class_description }}</p>
-            </div>
+            <form action="{{ url_for('choose_class') }}" method="POST">
+                <textarea name="user_description" placeholder="Enter your description here...">{{ user_description if user_description else ''}}</textarea>
+                <button type="submit" >Submit Description</button>
+            
+            </form>
             <div class="derived-stats">
                 <h3>Derived Stats</h3>
                 <div class="stat">
@@ -80,7 +80,7 @@
         <a href="/character_creation" class="navigation-button">
             <button class="nav-button">Back</button>
         </a>
-        <a href="/main_screen" class="navigation-button">
+        <a href="/finallisation_of_creation" class="navigation-button">
             <button class="nav-button">Next</button>
         </a>
     </div>

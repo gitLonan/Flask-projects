@@ -1,23 +1,26 @@
 from app import app
-from flask import render_template, redirect, url_for, request, session
+from flask import render_template, redirect, url_for, request, session, flash
 from app import stats
 from app import non_combat_text
 from app import stats_generator, treshold, create_class_instance, character, list_of_classes
-
+from app.character_models import CharacterClass
 import typing
 import random
 
 
 
 ############ MAIN SCREEN ##################################
-@app.route("/main_screen")
-@app.route("/", methods = ["GET", "POST"])
-def home_page():
+@app.route("/")
+@app.route("/main_screen", methods = ["GET", "POST"])
+def main_screen():
     """ Renders the first page on the server"""
 
     stats.avaliable = True
     return render_template('main_menu/main_screen.html', title='Home')
 ##########################
+
+
+
 
 
 ############ Character Creation Related ##################################
@@ -56,60 +59,48 @@ def reroll():
 
 
 
-@app.route('/available_class', methods = ["POST", "GET"])
-def treshold_for_classes():
+@app.route('/setting_class_up', methods = ["POST", "GET"])
+def setting_class_up():
     character.session_remembering = {}
     character.selected_class_string = ''
-    stats.setOriginalStats()
     character.update_stats(stats)
+    character.selected_class_string = ""
+    character.selected_icon = ""
     return redirect(url_for("choose_class"))
 
 
 
 @app.route('/choose_class', methods = ["POST", "GET"])
 def choose_class():
-    
+    """ Func that handels class, icon selection and description writing"""
     
     classes = treshold.get_list_of_available_classes(character)
-    #this is soo that python doesnt make thousands of instances of classes when user selects different ones +
-    #when i add class specific stats this session remembers and i can just switch between instances of what was clicked
-     
-    
-    
-    
     selected_class_object = character
 
     if request.method == "POST" and request.form.get('class'):
         character.selected_class_string = request.form.get('class', default="")
-        print(character.selected_class_string)
-
         if character.selected_class_string in character.session_remembering:
             character.cookie = 1
-            stats.setOriginalStats()
             character.update_stats(stats)
-            
             selected_class_object = character.session_remembering[character.selected_class_string]
             selected_class_object.add_class_specific_stats(character)
-            
-            
-            print(character.session_remembering)
         else:
             character.cookie = 1
             selected_class_object = create_class_instance(character.selected_class_string, stats.STRENGTH, stats.AGILITY, stats.INTELLIGENCE, stats.WISDOM, stats.CONSTITUTION)
             character.session_remembering[character.selected_class_string] = selected_class_object
-            stats.setOriginalStats()
             character.update_stats(stats)
             selected_class_object.add_class_specific_stats(character)
-            print(character.session_remembering)
+            
 
     if request.method == "POST" and request.form.get('icon'):
-        #print("ASDSAD", character.session_remembering,character.selected_class_string,character.session_remembering[character.selected_class_string])
         selected_class_object = character.session_remembering[character.selected_class_string]
         character.selected_icon = request.form.get('icon')
+    
+    if request.method == "POST" and request.form.get("user_description"):
+        selected_class_object = character.session_remembering[character.selected_class_string]
+        character.description = request.form.get("user_description")
+        print(character.description)
         
-
-
-
     return render_template("main_menu/character_creation/class_choice.html",
                              available_classes = classes,
                              class_description = selected_class_object.description,
@@ -121,10 +112,29 @@ def choose_class():
                              speed = character.speed,
                              selected_class=character.selected_class_string,
                              available_icons = selected_class_object.get_icon_assets(),
-                             selected_icon = character.selected_icon
+                             selected_icon = character.selected_icon,
+                             user_description = character.description
                              )
 
+@app.route('/finallisation_of_creation', methods=["POST", "GET"])
+def finallisation_of_creation():
+    """ Enters the needed information into the database after creating character"""
+
+    
+    if character.selected_icon == "" or character.selected_class_string == "":
+        character.selected_class_string = ""
+        return redirect(url_for("setting_class_up"))
+    
+    database_class = CharacterClass(name = "Muad'Dib",
+                                class_name = "asd")
+    
+    return redirect(url_for("main_screen"))
+
 ##############################################################
+
+
+
+
 
 
 
@@ -145,9 +155,14 @@ def next_tip():
     if request.method == "POST":
         tips = non_combat_text.get_text('tips')
     return redirect(url_for("select_difficulty"))
-
-
 ########################################################
+
+
+
+
+
+
+##############################   Starting game   #################################################################
 @app.route("/choose_character")
 def characters():
     """
@@ -167,3 +182,4 @@ def characters():
         return redirect(url_for("/"))
     return render_template('main_menu/character.html', title='Character Fight', characters=characters)
     
+################################################################################################################

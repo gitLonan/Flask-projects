@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 class CharacterClass(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True, unique=True)
     name: so.Mapped[str] = so.mapped_column(sa.String(12), unique=True, index=True)
-    about_me: so.Mapped[Optional[str]] = so.mapped_column(sa.String(30))
+    description: so.Mapped[Optional[str]] = so.mapped_column(sa.String(30))
     icon: so.Mapped[str] = so.mapped_column()
     level: so.Mapped[int] = so.mapped_column()
     class_name: so.Mapped[str] = so.mapped_column()
@@ -29,13 +29,11 @@ class CharacterClass(db.Model):
     speed: so.Mapped[int] = so.mapped_column()
     physical_defense: so.Mapped[int] = so.mapped_column()
     magical_defense: so.Mapped[int] = so.mapped_column()
-    exp_rate: so.Mapped[int] = so.mapped_column()
     hp: so.Mapped[int] = so.mapped_column()
-    critical_chance: so.Mapped[int] = so.mapped_column()
-
-    #HIDDEN STATS:
     
-   
+    #HIDDEN STATS:
+    exp_rate: so.Mapped[int] = so.mapped_column()
+    critical_chance: so.Mapped[int] = so.mapped_column()
 
 
 
