@@ -16,17 +16,52 @@
             <div class="character">
                 <input type="hidden" name="icon" value="{{ character.icon }}">
                 <input type="hidden" name="class_name" value="{{ character.class_name }}">
+                <div class="level">
+                    Level: {{ character.level }}
+                </div>
                 <img src="{{ url_for('static', filename='classes/' + character.class_name + '/' + character.icon + '.png') }}" alt="{{ characters.name }}" class="character-image">
-                <li>Strength: {{ character.level }}</li>
+
                 <div class="character-details">
                     <h2>{{ character.name }}</h2>
-                    <ul class="stats">
-                        <li>Strength: {{ character.stats_STR }}</li>
-                        <li>Agility: {{ character.stats_AGI }}</li>
-                        <li>Intelligence: {{ character.stats_INT }}</li>
-                        <li>Constitution: {{ character.stats_CON }}</li>
-                        <li>Wisdom: {{ character.stats_WIS }}</li>
-                    </ul>
+                    <div class="stats-container">
+                        <div class="derived-stats">
+                            <ul>
+                                <li>
+                                    <img src="{{ url_for('static', filename='icons/physical attack.jpg') }}" class="stat-icon">
+                                    Physical Attack: {{ character.physical_attack }}
+                                </li>
+                                <li>
+                                    <img src="{{ url_for('static', filename='icons/magical attack.jpg') }}" class="stat-icon">
+                                    Magical Attack: {{ character.magical_attack }}
+                                </li>
+                                <li>
+                                    <img src="{{ url_for('static', filename='icons/physical defense.jpg') }}" class="stat-icon">
+                                    Physical Defense: {{ character.physical_defense }}
+                                </li>
+                                <li>
+                                    <img src="{{ url_for('static', filename='icons/magical defense.jpg') }}" class="stat-icon">
+                                    Magical Defense: {{ character.magical_defense }}
+                                </li>
+                                <li>
+                                    <img src="{{ url_for('static', filename='icons/speed.jpg') }}" class="stat-icon">
+                                    Speed: {{ character.speed }}
+                                </li>
+                                <li>
+                                    <img src="{{ url_for('static', filename='icons/health.jpg') }}" class="stat-icon">
+                                    Health: {{ character.hp }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="base-stats">
+                            <ul>
+                                <li>Strength: {{ character.stats_STR }}</li>
+                                <li>Agility: {{ character.stats_AGI }}</li>
+                                <li>Intelligence: {{ character.stats_INT }}</li>
+                                <li>Constitution: {{ character.stats_CON }}</li>
+                                <li>Wisdom: {{ character.stats_WIS }}</li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="description">
                         <p>{{ character.description[:140] }}</p>
                     </div>

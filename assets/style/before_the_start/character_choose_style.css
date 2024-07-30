@@ -48,8 +48,16 @@ body {
     width: 180px;
     height: 180px;
     margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 55px;
     border-radius: 10px;
     border: 2px solid #ffd700;
+}
+
+.level {
+    font-size: 20px;
+    color: #ffd700;
+    margin-bottom: 10px;
 }
 
 .character-details {
@@ -79,16 +87,35 @@ body {
     word-wrap: break-word;
 }
 
-.stats {
-    list-style-type: none;
-    padding: 0;
-    margin: 10px 0 20px;
-    text-align: center;
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
-.stats li {
+.derived-stats, .base-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.derived-stats ul, .base-stats ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.derived-stats li, .base-stats li {
+    display: flex;
+    align-items: center;
     margin: 5px 0;
-    font-size: 22px;
+    font-size: 18px; /* Adjusted font size for better alignment */
+}
+
+.derived-stats li img.stat-icon, .base-stats li img.stat-icon {
+    width: 30px; /* Adjust size as needed */
+    height: 30px; /* Adjust size as needed */
+    margin-right: 10px;
 }
 
 .description {
@@ -123,6 +150,3 @@ button:hover {
     background-color: #ffd700;
     color: #333;
 }
-
-
-
