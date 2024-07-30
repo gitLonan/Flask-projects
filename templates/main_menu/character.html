@@ -14,14 +14,18 @@
         <div class="container">
             {% for character in characters %}
             <div class="character">
-                <img src="{{ url_for('static', filename='warrior.png') }}" alt="{{ characters.name }}" class="character-image">
+                <input type="hidden" name="icon" value="{{ character.icon }}">
+                <input type="hidden" name="class_name" value="{{ character.class_name }}">
+                <img src="{{ url_for('static', filename='classes/' + character.class_name + '/' + character.icon + '.png') }}" alt="{{ characters.name }}" class="character-image">
+                <li>Strength: {{ character.level }}</li>
                 <div class="character-details">
                     <h2>{{ character.name }}</h2>
                     <ul class="stats">
-                        <li>Strength: {{ character.str }}</li>
-                        <li>Agility: {{ character.agi }}</li>
-                        <li>Intelligence: {{ character.int }}</li>
-                        <li>Constitution: {{ character.con }}</li>
+                        <li>Strength: {{ character.stats_STR }}</li>
+                        <li>Agility: {{ character.stats_AGI }}</li>
+                        <li>Intelligence: {{ character.stats_INT }}</li>
+                        <li>Constitution: {{ character.stats_CON }}</li>
+                        <li>Wisdom: {{ character.stats_WIS }}</li>
                     </ul>
                     <div class="description">
                         <p>{{ character.description[:140] }}</p>

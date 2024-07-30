@@ -16,7 +16,7 @@ class Character():
         self.medium_coefficient = 0.7
         self.lower_coefficient = 0.3
 
-
+        self.name = ""
         self.description = ""
         self.selected_icon = ''
         self.selected_class_string = ""
@@ -30,6 +30,7 @@ class Character():
         self.hp = 0
         self.magical_attack = 0
         self.magical_defense = 0
+        self.exp_rate = 1
 
     def get_description(self):
         return " "
@@ -58,7 +59,7 @@ class Knight(Character):
         super().__init__(*args, **kwargs)
         
         self.description = "A disciplined warrior clad in armor, the Knight excels in both offense and defense. With unwavering courage and strength, they protect allies and vanquish foes."
-        self.name = "Knight"
+        self.class_name = "Knight"
 
 
     def add_class_specific_stats(self, character):
@@ -86,7 +87,7 @@ class Rouge(Character):
         super().__init__( *args, **kwargs)
 
         self.description = "A master of stealth and agility, the Rogue excels in evasion and precision strikes. Quick and cunning, they navigate the shadows to outmaneuver and incapacitate foes."
-        self.name = "Rouge"
+        self.class_name = "Rouge"
 
     def add_class_specific_stats(self, character):
         if character.cookie == 1:
@@ -111,11 +112,12 @@ class Druid(Character):
         super().__init__( *args, **kwargs)
 
         self.description = "KERUSA"
-        self.name = "Druid"
+        self.class_name = "Druid"
 
     def add_class_specific_stats(self, character):
         if character.cookie == 1:
             character.magical_attack += 20
+            character.exp_rate += 0.1
             character.cookie = 0
 
     def get_icon_assets(self):

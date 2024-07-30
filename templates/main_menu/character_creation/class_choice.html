@@ -13,6 +13,16 @@
     </style>
 </head>
 <body>
+
+    <div class="header">
+        <form action="{{ url_for('choose_class') }}" method="POST" class="name-form">
+            
+            <input type="text" name="character_name" placeholder="Enter your character's name" value="{{ character_name if character_name else '' }}">
+
+            <button type="submit" class="name-button">Submit Name</button>
+        </form>
+    </div>
+
     <div class="main-container">
         <div class="icon-container">
             {% for icon in available_icons %}
@@ -44,6 +54,9 @@
                 <button type="submit" >Submit Description</button>
             
             </form>
+            <div class="class-description">
+                <p>{{ class_description }}</p>
+            </div>
             <div class="derived-stats">
                 <h3>Derived Stats</h3>
                 <div class="stat">

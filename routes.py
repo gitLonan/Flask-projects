@@ -1,4 +1,5 @@
-from app import app
+from app import app, db
+import sqlalchemy as sa
 from flask import render_template, redirect, url_for, request, session, flash
 from app import stats
 from app import non_combat_text
@@ -14,7 +15,9 @@ import random
 @app.route("/main_screen", methods = ["GET", "POST"])
 def main_screen():
     """ Renders the first page on the server"""
-
+    query = sa.select(CharacterClass)
+    posts = db.session.scalars(query).all()
+    print(posts[0].stats_AGI)
     stats.avaliable = True
     return render_template('main_menu/main_screen.html', title='Home')
 ##########################
@@ -101,6 +104,13 @@ def choose_class():
         character.description = request.form.get("user_description")
         print(character.description)
         
+    if request.method == "POST" and request.form.get('character_name'):
+        character_name = request.form.get('character_name')
+        print(character_name)
+        character.name = character_name
+        selected_class_object = character.session_remembering[character.selected_class_string]
+
+
     return render_template("main_menu/character_creation/class_choice.html",
                              available_classes = classes,
                              class_description = selected_class_object.description,
@@ -113,7 +123,8 @@ def choose_class():
                              selected_class=character.selected_class_string,
                              available_icons = selected_class_object.get_icon_assets(),
                              selected_icon = character.selected_icon,
-                             user_description = character.description
+                             user_description = character.description,
+                             character_name = character.name
                              )
 
 @app.route('/finallisation_of_creation', methods=["POST", "GET"])
@@ -125,8 +136,30 @@ def finallisation_of_creation():
         character.selected_class_string = ""
         return redirect(url_for("setting_class_up"))
     
-    database_class = CharacterClass(name = "Muad'Dib",
-                                class_name = "asd")
+    database_class = CharacterClass(name = character.name,
+                                description = character.description,
+                                icon = character.selected_icon,
+                                level = 1,
+                                class_name = character.selected_class_string,
+                                #BASE STATS
+                                stats_STR = character.str,
+                                stats_AGI = character.agi,
+                                stats_INT = character.int,
+                                stats_CON = character.con,
+                                stats_WIS = character.wis,
+                                #DERIVED STATS
+                                physical_attack = character.physical_attack,
+                                magical_attack = character.magical_attack,
+                                speed = character.speed,
+                                physical_defense = character.physical_defense,
+                                magical_defense = character.magical_defense,
+                                hp = character.hp,
+                                #HIDDEN STATS
+                                exp_rate = character.exp_rate,
+                                critical_chance = 0,)
+    
+    db.session.add(database_class)
+    db.session.commit()
     
     return redirect(url_for("main_screen"))
 
@@ -178,8 +211,12 @@ def characters():
         {'name': 'Character 2', 'str': 7, 'agi': 10, 'int': 9, 'con': 80, 'description': 'A swift rogue.', 'image': 'character2.png'},
         # Add more characters here
     ]
+    query = sa.select(CharacterClass)
+    playable_characters = list(db.session.scalars(query).all())
+
+    
     if characters is None:
         return redirect(url_for("/"))
-    return render_template('main_menu/character.html', title='Character Fight', characters=characters)
+    return render_template('main_menu/character.html', title='Character Fight', characters=playable_characters)
     
 ################################################################################################################
