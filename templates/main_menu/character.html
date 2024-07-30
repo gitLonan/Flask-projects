@@ -16,13 +16,14 @@
             <div class="character">
                 <input type="hidden" name="icon" value="{{ character.icon }}">
                 <input type="hidden" name="class_name" value="{{ character.class_name }}">
-                <div class="level">
-                    Level: {{ character.level }}
-                </div>
+                
                 <img src="{{ url_for('static', filename='classes/' + character.class_name + '/' + character.icon + '.png') }}" alt="{{ characters.name }}" class="character-image">
 
                 <div class="character-details">
-                    <h2>{{ character.name }}</h2>
+                    <div class="name-level-container">
+                        <div class="level">Level: {{ character.level }}</div>
+                        <h2 class="character-name">{{ character.name }}</h2>
+                    </div>
                     <div class="stats-container">
                         <div class="derived-stats">
                             <ul>
