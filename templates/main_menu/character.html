@@ -23,6 +23,7 @@
                     <div class="name-level-container">
                         <div class="level">Level: {{ character.level }}</div>
                         <h2 class="character-name">{{ character.name }}</h2>
+                        <div class="character-class">Class: {{ character.class_name }}</div>
                     </div>
                     <div class="stats-container">
                         <div class="derived-stats">
@@ -71,8 +72,8 @@
             {% endfor %}
         </div>
         <div class="fight-button">
-            <form action="/fight" method="POST">
-                <button type="submit">Fight</button>
+            <form action="/first_city" method="POST">
+                <button type="submit">Play</button>
             </form>
         </div>
     </body>

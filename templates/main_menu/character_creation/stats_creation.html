@@ -22,11 +22,11 @@
             <div class="stat">
                 <div class="stat-name">Strength</div>
                 <div class="stat-number-container">
-                    <form action="{{ url_for('update_stat', stat='STRENGTH', action='decrement') }}" method="POST" class="inline-form">
+                    <form action="{{ url_for('rotuess.update_stat', stat='STRENGTH', action='decrement') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">-</button>
                     </form>
                     <div class="stat-number">{{ character.STRENGTH }}</div>
-                    <form action="{{ url_for('update_stat', stat='STRENGTH', action='increment') }}" method="POST" class="inline-form">
+                    <form action="{{ url_for('rotuess.update_stat', stat='STRENGTH', action='increment') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">+</button>
                     </form>
                     
@@ -36,11 +36,11 @@
             <div class="stat">
                 <div class="stat-name">Agility</div>
                 <div class="stat-number-container">
-                    <form action="{{ url_for('update_stat', stat='AGILITY', action='decrement') }}" method="POST" class="inline-form">
+                    <form action="{{ url_for('rotuess.update_stat', stat='AGILITY', action='decrement') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">-</button>
                     </form>
                     <div class="stat-number">{{ character.AGILITY }}</div>
-                    <form action="{{ url_for('update_stat', stat='AGILITY', action='increment') }}" method="POST" class="inline-form">
+                    <form action="{{ url_for('rotuess.update_stat', stat='AGILITY', action='increment') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">+</button>
                     </form>
                     
@@ -50,11 +50,11 @@
             <div class="stat">
                 <div class="stat-name">Intelligence</div>
                 <div class="stat-number-container">
-                    <form action="{{ url_for('update_stat', stat='INTELLIGENCE', action='decrement') }}" method="POST" class="inline-form">
+                    <form action="{{ url_for('rotuess.update_stat', stat='INTELLIGENCE', action='decrement') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">-</button>
                     </form>
                     <div class="stat-number">{{ character.INTELLIGENCE }}</div>
-                    <form action="{{ url_for('update_stat', stat='INTELLIGENCE', action='increment') }}" method="POST" class="inline-form">
+                    <form action="{{ url_for('rotuess.update_stat', stat='INTELLIGENCE', action='increment') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">+</button>
                     </form>
                     
@@ -64,11 +64,11 @@
             <div class="stat">
                 <div class="stat-name">Constitution</div>
                 <div class="stat-number-container">
-                    <form action="{{ url_for('update_stat', stat='CONSTITUTION', action='decrement') }}" method="POST" class="inline-form">
+                    <form action="{{ url_for('rotuess.update_stat', stat='CONSTITUTION', action='decrement') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">-</button>
                     </form>
                     <div class="stat-number">{{ character.CONSTITUTION }}</div>
-                    <form action="{{ url_for('update_stat', stat='CONSTITUTION', action='increment') }}" method="POST" class="inline-form">
+                    <form action="{{ url_for('rotuess.update_stat', stat='CONSTITUTION', action='increment') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">+</button>
                     </form>
                     
@@ -78,11 +78,11 @@
             <div class="stat">
                 <div class="stat-name">Wisdom</div>
                 <div class="stat-number-container">
-                    <form action="{{ url_for('update_stat', stat='WISDOM', action='decrement') }}" method="POST" class="inline-form">
+                    <form action="{{ url_for('rotuess.update_stat', stat='WISDOM', action='decrement') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">-</button>
                     </form>
                     <div class="stat-number">{{ character.WISDOM }}</div>
-                    <form action="{{ url_for('update_stat', stat='WISDOM', action='increment') }}" method="POST" class="inline-form">
+                    <form action="{{ url_for('rotuess.update_stat', stat='WISDOM', action='increment') }}" method="POST" class="inline-form">
                         <button type="submit" class="add-button">+</button>
                     </form>
                     
@@ -97,7 +97,7 @@
         
     </div>
     <div class="navigation-buttons">
-        <form action="{{ url_for('reroll') }}" method="POST" class="inline-form">
+        <form action="{{ url_for('rotuess.reroll') }}" method="POST" class="inline-form">
             <button type="submit" class="re-roll-button">Re-roll</button>
         </form>
         <div>

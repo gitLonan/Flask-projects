@@ -9,11 +9,20 @@ from app.tresh_hold_for_classes import Treshold
 from app.character_classes import Knight, Rouge, Druid
 from app.character_classes import Character
 
+#BluePrints import
+
+
+
+
+
 
 
 app = Flask(__name__, static_folder='assets')
 app.config.from_object(Config)
 app.static_folder = app.config['STATIC_FOLDER']
+
+
+
 
 stats = Stats()
 treshold = Treshold()
@@ -38,6 +47,20 @@ def create_class_instance(class_name, *args, **kwargs):
             return selected_class_object(*args, **kwargs)
         return None
 
+
+#####BluePrint reg
+# character, db, stats, non_combat_text, treshold, create_class_instance, CharacterClass
+from app.routess import main_menu_bp
+bp_main_menu = main_menu_bp(stats)
+app.register_blueprint(bp_main_menu)
+
+from app.routess import character_creation
+bp_char_creation = character_creation( character, db, stats, non_combat_text, treshold, create_class_instance)
+app.register_blueprint(bp_char_creation)
+
+
 from app import routes, stats_generator, stats, treshold, create_class_instance 
 from app import non_combat_text, character_models, character
+
+
 #from app import routing_url

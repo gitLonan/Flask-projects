@@ -161,7 +161,7 @@ button:hover {
 }
 
 .level {
-    font-size: 20px;
+    font-size: 24px;
     color: #ffd700;
     margin-right: 40px; /* Space between level and name */
 }
@@ -170,4 +170,9 @@ button:hover {
     font-size: 24px;
     color: #ffd700;
     margin: 0;
+}
+.character-class {
+    font-size: 24px;
+    color: #ffd700;
+    margin-left: 25px;
 }
