@@ -48,16 +48,24 @@ def create_class_instance(class_name, *args, **kwargs):
         return None
 
 
-#####BluePrint reg
-# character, db, stats, non_combat_text, treshold, create_class_instance, CharacterClass
-from app.routess import main_menu_bp
+#####    BluePrint Register ################
+
+from app.routess import main_menu_bp, character_creation, difficulty_settings, choose_character
 bp_main_menu = main_menu_bp(stats)
 app.register_blueprint(bp_main_menu)
 
-from app.routess import character_creation
 bp_char_creation = character_creation( character, db, stats, non_combat_text, treshold, create_class_instance)
 app.register_blueprint(bp_char_creation)
 
+bp_difficulty_settings = difficulty_settings(stats, non_combat_text)
+app.register_blueprint(bp_difficulty_settings)
+
+bp_choose_character = choose_character(db)
+app.register_blueprint(bp_choose_character)
+
+
+
+#############################################3
 
 from app import routes, stats_generator, stats, treshold, create_class_instance 
 from app import non_combat_text, character_models, character

@@ -15,7 +15,7 @@
 <body>
 
     <div class="header">
-        <form action="{{ url_for('rotuess.choose_class') }}" method="POST" class="name-form">
+        <form action="{{ url_for('char_creation.choose_class') }}" method="POST" class="name-form">
             
             <input type="text" name="character_name" placeholder="Enter your character's name" value="{{ character_name if character_name else '' }}">
 
@@ -27,7 +27,7 @@
         <div class="icon-container">
             {% for icon in available_icons %}
                 <div class="icon-wrapper {% if selected_icon == icon %}selected-icon{% endif %}">
-                    <form action="{{ url_for('rotuess.choose_class') }}" method="POST" class="inline-form">
+                    <form action="{{ url_for('char_creation.choose_class') }}" method="POST" class="inline-form">
                         <button type="submit" name="icon" value="{{ icon }}" class="icon-button">
                             <input type="hidden" name="selected_class" value="{{ selected_class }}">
                             <img src="{{ url_for('static', filename='classes/' + selected_class + '/' + icon + '.png') }}" alt="{{ icon }}" class="icon">
@@ -39,7 +39,7 @@
         
         <div class="class-selection">
             {% for class in available_classes %}
-                <form action="{{ url_for('rotuess.choose_class') }}" method="POST" class="class-form">
+                <form action="{{ url_for('char_creation.choose_class') }}" method="POST" class="class-form">
                     <input type="hidden" name="selected_class" value="{{ selected_class }}">
                     <button type="submit" name="class" value={{class}} class="class-button {% if selected_class == class %}selected{% endif %}">
                         {{ class }}
@@ -49,7 +49,7 @@
         </div>
 
         <div class="info-container">
-            <form action="{{ url_for('rotuess.choose_class') }}" method="POST">
+            <form action="{{ url_for('char_creation.choose_class') }}" method="POST">
                 <textarea name="user_description" placeholder="Enter your description here...">{{ user_description if user_description else ''}}</textarea>
                 <button type="submit" >Submit Description</button>
             

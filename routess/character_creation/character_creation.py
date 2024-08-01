@@ -3,7 +3,17 @@ from flask import redirect, url_for, request, session, flash
 
 from app.character_models import CharacterClass
 
-def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, create_class_instance):
+def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, create_class_instance) -> None:
+    """
+    Parameters:
+        class: blueprint_bp - blueprint created in the init file in this folder                                                      
+        class: character - instance of super class Character that has all the stats for every class                                        
+        db - SQLite Alchemy database                                                                                 
+        class: stats -  instance of class Stats thats generates stats during character creation                                                                       
+        class: non_combat_text - gets diffeerent texts that are present in character creation                               
+        class: treshold - returns list of classes that the given stats meet the treshold                                     
+        func: create_class_instance                                         
+    """
 
     @blueprint_bp.route("/character_creation", methods = ["GET", "POST"])
     def character_creation():
@@ -29,14 +39,14 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
         elif action == "decrement":
             if hasattr(stats, stat):
                 stats.update(stat, action)
-        return redirect(url_for('rotuess.character_creation'))
+        return redirect(url_for('char_creation.character_creation'))
 
 
     @blueprint_bp.route('/reroll', methods=["POST"])
     def reroll():
         """Handles rerolling stats."""
         stats.avaliable_random_gen = True
-        return redirect(url_for('rotuess.character_creation'))
+        return redirect(url_for('char_creation.character_creation'))
 
 
 
@@ -47,7 +57,7 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
         character.update_stats(stats)
         character.selected_class_string = ""
         character.selected_icon = ""
-        return redirect(url_for("rotuess.choose_class"))
+        return redirect(url_for("char_creation.choose_class"))
 
 
 
@@ -113,7 +123,7 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
         
         if character.selected_icon == "" or character.selected_class_string == "":
             character.selected_class_string = ""
-            return redirect(url_for("rotuess.setting_class_up"))
+            return redirect(url_for("char_creation.setting_class_up"))
         
         database_class = CharacterClass(name = character.name,
                                     description = character.description,

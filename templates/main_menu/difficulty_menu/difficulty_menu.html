@@ -18,7 +18,7 @@
     {% if selected_difficulty == 'Baby' %}difficulty-baby{% elif selected_difficulty == 'Easy' %}difficulty-easy{% elif selected_difficulty == 'Normal' %}difficulty-normal{% elif selected_difficulty == 'Hard' %}difficulty-hard{% endif %}">
     <h1>Difficulty Menu</h1>
     <div class="buttons">
-        <form action="{{ url_for('select_difficulty') }}" method="POST">
+        <form action="{{ url_for('difficulty_settings.select_difficulty') }}" method="POST">
             <div class="button-wrapper">
                 <button type="submit" name="difficulty" value="Baby" class="difficulty-button {% if selected_difficulty == 'Baby' %}selected{% endif %}">Baby</button>
             </div>
@@ -42,7 +42,7 @@
                 <a href="/main_screen" class="menu-link">
                     <button class="menu-button">Back</button>
                 </a>
-        <form action="{{ url_for('next_tip') }}" method="POST" class="next-tip-form">
+        <form action="{{ url_for('difficulty_settings.next_tip') }}" method="POST" class="next-tip-form">
             <button type="submit" id="next-tip" class="next-tip-button">Next Tip</button>
         </form>
     </div>
