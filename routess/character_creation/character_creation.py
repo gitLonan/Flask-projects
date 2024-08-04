@@ -55,6 +55,8 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
         character.session_remembering = {}
         character.selected_class_string = ''
         character.update_stats(stats)
+        character.name = ""
+        character.description = ""
         character.selected_class_string = ""
         character.selected_icon = ""
         return redirect(url_for("char_creation.choose_class"))
@@ -88,15 +90,26 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
             character.selected_icon = request.form.get('icon')
         
         if request.method == "POST" and request.form.get("user_description"):
-            selected_class_object = character.session_remembering[character.selected_class_string]
+            try:
+                selected_class_object = character.session_remembering[character.selected_class_string]
+            except KeyError:
+                flash("You need to select the class first!", "error")
+                redirect(url_for("char_creation.choose_class"))
             character.description = request.form.get("user_description")
             print(character.description)
             
+            
         if request.method == "POST" and request.form.get('character_name'):
-            character_name = request.form.get('character_name')
-            print(character_name)
-            character.name = character_name
-            selected_class_object = character.session_remembering[character.selected_class_string]
+            try:
+                selected_class_object = character.session_remembering[character.selected_class_string]
+                character_name = request.form.get('character_name')
+                print(character_name)
+                character.name = character_name
+            except KeyError:
+                flash("Before naming select class first!", "error")
+                redirect(url_for("char_creation.choose_class"))
+            
+            
 
 
         return render_template("main_menu/character_creation/class_choice.html",
@@ -120,10 +133,21 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
     def finallisation_of_creation():
         """ Enters the needed information into the database after creating character"""
 
-        
-        if character.selected_icon == "" or character.selected_class_string == "":
-            character.selected_class_string = ""
+        if character.selected_class_string == "":
+            flash("Before continuing select class first!", "error")
             return redirect(url_for("char_creation.setting_class_up"))
+        if character.selected_icon == "":
+            flash("Before continuing select your icon!", "error")
+            return redirect(url_for("char_creation.setting_class_up"))
+        if character.name == "":
+            flash("Before continuing name your character!", "error")
+            return redirect(url_for("char_creation.setting_class_up"))
+
+        
+        if character.selected_icon == "" or character.selected_class_string == "" or character.name == "":
+            flash("Before continuing select class first!", "error")
+            character.selected_class_string = ""
+            
         
         database_class = CharacterClass(name = character.name,
                                     description = character.description,

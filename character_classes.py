@@ -75,7 +75,8 @@ class Knight(Character):
         #print(directory)
         list_of_icons = []
         for name in os.listdir(directory):
-                list_of_icons.append(name[:-4])
+                if name[-4:] == ".png":
+                    list_of_icons.append(name[:-4])
         return list_of_icons
 
     def get_description(self):
@@ -100,7 +101,8 @@ class Rouge(Character):
         #print(directory)
         list_of_icons = []
         for name in os.listdir(directory):
-                list_of_icons.append(name[:-4])
+                if name[-4:] == ".png":
+                    list_of_icons.append(name[:-4])
         return list_of_icons
     
     def get_description(self):
@@ -126,7 +128,8 @@ class Druid(Character):
         #print(directory)
         list_of_icons = []
         for name in os.listdir(directory):
-                list_of_icons.append(name[:-4])
+                if name[-4:] == ".png":
+                    list_of_icons.append(name[:-4])
         return list_of_icons
     
     def get_description(self):

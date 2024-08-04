@@ -70,7 +70,7 @@ app.register_blueprint(bp_zone_1)
 
 #############################################3
 
-from app import routes, stats_generator, stats, treshold, create_class_instance 
+from app import stats_generator, stats, treshold, create_class_instance 
 from app import non_combat_text, character_models, character
 
 
