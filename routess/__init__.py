@@ -1,7 +1,7 @@
 from flask import Blueprint
 
 
-def main_menu_bp(*args, **kwargs):
+def main_menu_bp(*args, **kwargs) -> Blueprint:
     bp_main_menu = Blueprint('routess', __name__)
     from .main_menu.main_menu import init_routes
     init_routes(bp_main_menu, *args, **kwargs)
@@ -13,18 +13,23 @@ def character_creation(*args, **kwargs):
     init_routes(bp_character_creation, *args, **kwargs)
     return bp_character_creation
 
-def difficulty_settings(*args, **kwargs):
+def difficulty_settings(*args, **kwargs) -> Blueprint:
     bp_difficulty = Blueprint("difficulty_settings", __name__)
     from .difficulty_settings.difficulty import init_routes
     init_routes(bp_difficulty, *args, **kwargs)
     return bp_difficulty
 
-def choose_character(*args, **kwargs):
+def choose_character(*args, **kwargs) -> Blueprint:
     bp_choose_character = Blueprint('choose_character', __name__)
     from .choose_character.choose_character import init_routes
     init_routes(bp_choose_character, *args, **kwargs)
     return bp_choose_character
 
+def zone_1(*args, **kwargs) -> Blueprint:
+    bp = Blueprint("zone_1", __name__)
+    from .zones.zone_1 import init_routes
+    init_routes(bp, *args, **kwargs)
+    return bp
 
 
     

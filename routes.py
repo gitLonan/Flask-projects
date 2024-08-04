@@ -9,10 +9,7 @@ import typing
 import random
 
 
-@app.route("/first_city", methods=["POST"])
-def first_city():
-    
-    return render_template("first_zone/first_city.html")
+
 ################################################################################################################
 
 

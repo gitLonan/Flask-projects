@@ -50,7 +50,7 @@ def create_class_instance(class_name, *args, **kwargs):
 
 #####    BluePrint Register ################
 
-from app.routess import main_menu_bp, character_creation, difficulty_settings, choose_character
+from app.routess import main_menu_bp, character_creation, difficulty_settings, choose_character, zone_1
 bp_main_menu = main_menu_bp(stats)
 app.register_blueprint(bp_main_menu)
 
@@ -62,6 +62,9 @@ app.register_blueprint(bp_difficulty_settings)
 
 bp_choose_character = choose_character(db)
 app.register_blueprint(bp_choose_character)
+
+bp_zone_1 = zone_1(character, db)
+app.register_blueprint(bp_zone_1)
 
 
 

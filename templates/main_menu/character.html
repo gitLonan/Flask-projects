@@ -1,80 +1,114 @@
 <!doctype html>
 <html>
-    <head>
-        <title>{{ title or "Character Fight" }}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style/before_the_start/character_choose_style.css') }}">
-        <style>
-            body {
-                background: url('{{ url_for('static', filename='background.png') }}') no-repeat center center fixed;
-                background-size: cover;
+<head>
+    <title>{{ title or "Character Fight" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/before_the_start/character_choose_style.css') }}">
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='background.png') }}') no-repeat center center fixed;
+            background-size: cover;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Check if there's a hash in the URL
+            if (window.location.hash) {
+                // Scroll to the element with the ID specified in the hash
+                const element = document.querySelector(window.location.hash);
+                if (element) {
+                    element.scrollIntoView();
+                }
             }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            {% for character in characters %}
-            <div class="character">
-                <input type="hidden" name="icon" value="{{ character.icon }}">
-                <input type="hidden" name="class_name" value="{{ character.class_name }}">
-                
-                <img src="{{ url_for('static', filename='classes/' + character.class_name + '/' + character.icon + '.png') }}" alt="{{ characters.name }}" class="character-image">
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        {% for character in characters %}
+        <div id="character-{{ character.name }}" class="character {% if character.name == selected_character_id %}selected-char{% endif %}">
+            <input type="hidden" name="icon" value="{{ character.icon }}">
+            <input type="hidden" name="class_name" value="{{ character.class_name }}">
 
-                <div class="character-details">
-                    <div class="name-level-container">
-                        <div class="level">Level: {{ character.level }}</div>
-                        <h2 class="character-name">{{ character.name }}</h2>
-                        <div class="character-class">Class: {{ character.class_name }}</div>
+            <img src="{{ url_for('static', filename='classes/' + character.class_name + '/' + character.icon + '.png') }}" alt="{{ character.name }}" class="character-image">
+
+            <div class="character-details">
+                <div class="name-level-container">
+                    <div class="level">Level: {{ character.level }}</div>
+                    <h2 class="character-name">{{ character.name }}</h2>
+                    <div class="character-class">Class: {{ character.class_name }}</div>
+                </div>
+                <div class="stats-container">
+                    <div class="derived-stats">
+                        <ul>
+                            <li>
+                                <img src="{{ url_for('static', filename='icons/physical attack.jpg') }}" class="stat-icon">
+                                Physical Attack: {{ character.physical_attack }}
+                            </li>
+                            <li>
+                                <img src="{{ url_for('static', filename='icons/magical attack.jpg') }}" class="stat-icon">
+                                Magical Attack: {{ character.magical_attack }}
+                            </li>
+                            <li>
+                                <img src="{{ url_for('static', filename='icons/physical defense.jpg') }}" class="stat-icon">
+                                Physical Defense: {{ character.physical_defense }}
+                            </li>
+                            <li>
+                                <img src="{{ url_for('static', filename='icons/magical defense.jpg') }}" class="stat-icon">
+                                Magical Defense: {{ character.magical_defense }}
+                            </li>
+                            <li>
+                                <img src="{{ url_for('static', filename='icons/speed.jpg') }}" class="stat-icon">
+                                Speed: {{ character.speed }}
+                            </li>
+                            <li>
+                                <img src="{{ url_for('static', filename='icons/health.jpg') }}" class="stat-icon">
+                                Health: {{ character.hp }}
+                            </li>
+                        </ul>
                     </div>
-                    <div class="stats-container">
-                        <div class="derived-stats">
-                            <ul>
-                                <li>
-                                    <img src="{{ url_for('static', filename='icons/physical attack.jpg') }}" class="stat-icon">
-                                    Physical Attack: {{ character.physical_attack }}
-                                </li>
-                                <li>
-                                    <img src="{{ url_for('static', filename='icons/magical attack.jpg') }}" class="stat-icon">
-                                    Magical Attack: {{ character.magical_attack }}
-                                </li>
-                                <li>
-                                    <img src="{{ url_for('static', filename='icons/physical defense.jpg') }}" class="stat-icon">
-                                    Physical Defense: {{ character.physical_defense }}
-                                </li>
-                                <li>
-                                    <img src="{{ url_for('static', filename='icons/magical defense.jpg') }}" class="stat-icon">
-                                    Magical Defense: {{ character.magical_defense }}
-                                </li>
-                                <li>
-                                    <img src="{{ url_for('static', filename='icons/speed.jpg') }}" class="stat-icon">
-                                    Speed: {{ character.speed }}
-                                </li>
-                                <li>
-                                    <img src="{{ url_for('static', filename='icons/health.jpg') }}" class="stat-icon">
-                                    Health: {{ character.hp }}
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="base-stats">
-                            <ul>
-                                <li>Strength: {{ character.stats_STR }}</li>
-                                <li>Agility: {{ character.stats_AGI }}</li>
-                                <li>Intelligence: {{ character.stats_INT }}</li>
-                                <li>Constitution: {{ character.stats_CON }}</li>
-                                <li>Wisdom: {{ character.stats_WIS }}</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="description">
-                        <p>{{ character.description[:140] }}</p>
+                    <div class="base-stats">
+                        <ul>
+                            <li>Strength: {{ character.stats_STR }}</li>
+                            <li>Agility: {{ character.stats_AGI }}</li>
+                            <li>Intelligence: {{ character.stats_INT }}</li>
+                            <li>Constitution: {{ character.stats_CON }}</li>
+                            <li>Wisdom: {{ character.stats_WIS }}</li>
+                        </ul>
                     </div>
                 </div>
+                <div class="description">
+                    <p>{{ character.description[:140] }}</p>
+                </div>
             </div>
-            {% endfor %}
+            <div class="delete-button-container">
+                <form action="{{ url_for('choose_character.delete_character') }}" method="POST">
+                    <input type="hidden" name="delete_id" value="{{ character.id }}">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
+            </div>
+            <!-- Select Button -->
+            <div class="select-button-container">
+                <form action="{{ url_for('choose_character.chosen_character') }}" method="POST">
+                    <input type="hidden" name="character_id" value="{{ character.name }}">
+                    <input type="hidden" name="character_selected" value="{{ character.id }}">
+                    <button type="submit" class="select-button">Select</button>
+                </form>
+            
+            </div>
         </div>
-        <div class="fight-button">
-            <form action="/first_city" method="POST">
-                <button type="submit">Play</button>
-            </form>
-        </div>
-    </body>
+        {% endfor %}
+        <div class="spacer"></div>
+    </div>
+    <div class="fight-button">
+        <form action="/first_city" method="POST">
+
+            <button type="submit">Play</button>
+        </form>
+        <a href="/main_screen"> 
+        <button type="submit">Back</button></a>
+    </div>
+</body>
 </html>

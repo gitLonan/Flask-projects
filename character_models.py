@@ -6,6 +6,7 @@ from typing import Optional
 from datetime import datetime, timezone
 
 class CharacterClass(db.Model):
+    character_selected = None
     id: so.Mapped[int] = so.mapped_column(primary_key=True, unique=True)
     name: so.Mapped[str] = so.mapped_column(sa.String(12), unique=True, index=True)
     description: so.Mapped[Optional[str]] = so.mapped_column(sa.String(30))
