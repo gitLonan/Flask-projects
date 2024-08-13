@@ -12,7 +12,7 @@ def init_routes(blueprint_bp, db) -> None:
         chosen_char = 0
         if CharacterClass.character_selected is not None:
             chosen_char = CharacterClass.character_selected
-
+            print(chosen_char)
         query = sa.select(CharacterClass)
         playable_characters = list(db.session.scalars(query).all())
         if playable_characters == []:
@@ -21,6 +21,8 @@ def init_routes(blueprint_bp, db) -> None:
     
     @blueprint_bp.route("/selected_character", methods = ["POST"])
     def chosen_character():
+        """ Selecting your character, sets string in CharacterClass.character_selected"""
+
         if request.method == "POST":
             chosen_char = request.form.get("character_id")
             
