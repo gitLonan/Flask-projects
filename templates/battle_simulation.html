@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle Simulation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/battle.css') }}">
+    
+</head>
+<body>
+    <div class="battle-container">
+        <style>
+            body {
+                background: url("{{ url_for('static', filename= character.current_zone + '/' + character.current_zone_encounter + '.png') }}") no-repeat center center fixed;
+                background-size: cover;
+            }
+        </style>
+        <!-- Left Side: Player's Character -->
+        <div class="left-side">
+            <div class="character-container">
+                <div class="character-header">
+                    <div class="character-name">{{ character.name }}</div>
+                    <div class="hp-bar">HP: {{ character.hp }}/{{ character.max_hp }}</div>
+                </div>
+                <div class="character-main">
+                    <div class="icon-container">
+                        <img src="{{ url_for('static', filename='classes/' + character.class + '/' + character.icon + '.png') }}" class="character-image" alt="Character Icon">
+                    </div>
+                    <div class="stats-container">
+                        <div class="stat">
+                            <img src= "{{ url_for('static', filename='icons/physical attack.jpg') }}" alt="Physical Damage Icon">
+                            <span>Physical Damage: {{ character.physical_dmg }}</span>
+                        </div>
+                        <div class="stat">
+                            <img src="{{ url_for('static', filename='icons/physical defense.jpg') }}" alt="Physical Defense Icon">
+                            <span>Physical Defense: {{ character.physical_def }}</span>
+                        </div>
+                        <div class="stat">
+                            <img src="{{ url_for('static', filename='icons/speed.jpg') }}" alt="Speed Icon">
+                            <span>Speed: {{ character.speed }}</span>
+                        </div>
+                        <div class="stat">
+                            <img src="{{ url_for('static', filename='icons/health.jpg') }}" alt="HP Icon">
+                            <span>HP: {{ character.hp }}</span>
+                        </div>
+                        <div class="stat">
+                            <img src="{{ url_for('static', filename='icons/magical attack.jpg') }}" alt="Magical Attack Icon">
+                            <span>Magical Attack: {{ character.magical_attack }}</span>
+                        </div>
+                        <div class="stat">
+                            <img src="{{ url_for('static', filename='icons/magical defense.jpg') }}"alt="Magical Defense Icon">
+                            <span>Magical Defense: {{ character.magical_defense }}</span>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="inventory-button">Inventory</button>
+                        <button class="cast-spell-button">Cast Spell</button>
+                    </div>
+                </div>
+                <div class="exp-bar">EXP: {{ character.exp }}/{{ character.next_level_exp }}</div>
+            </div>
+            <div class="character-actions">
+                <button class="attack-button">Attack</button>
+                <button class="escape-button">Escape</button>
+            </div>
+        </div>
+
+        <!-- Right Side: Enemies -->
+        <div class="right-side">
+            {% for enemy in enemies %}
+            <div class="enemy-container">
+                <div class="enemy-header">
+                    <div class="enemy-name">{{ enemy.name }}</div>
+                    <div class="enemy-hp-bar">HP: {{ enemy.current_hp }}/{{ enemy.max_hp }}</div>
+                </div>
+                <div class="enemy-main">
+                    <div class="icon-container">
+                        <img src="{{ url_for('static', filename='enemies/' + character.current_zone + '/' + enemy.name + '/' + enemy.enemy_icon + '.png') }}" class="enemy-icon" alt="Enemy Icon">
+                    </div>
+                    <div class="stats-container">
+                        <div class="stat">
+                            <img src="{{ url_for('static', filename='icons/physical attack.jpg') }}" alt="Physical Damage Icon">
+                            <span>Physical Damage: {{ enemy.physical_attack }}</span>
+                        </div>
+                        <div class="stat">
+                            <img src="{{ url_for('static', filename='icons/physical defense.jpg') }}" alt="Physical Defense Icon">
+                            <span>Physical Defense: {{ enemy.physical_defense }}</span>
+                        </div>
+                        <div class="stat">
+                            <img src="{{ url_for('static', filename='icons/speed.jpg') }}" alt="Speed Icon">
+                            <span>Speed: {{ enemy.speed }}</span>
+                        </div>
+                        <div class="stat">
+                            <img src="{{ url_for('static', filename='icons/health.jpg') }}" alt="HP Icon">
+                            <span>HP: {{ enemy.max_hp }}</span>
+                        </div>
+                        <div class="stat">
+                            <img src="{{ url_for('static', filename='icons/magical attack.jpg') }}" alt="Magical Attack Icon">
+                            <span>Magical Attack: {{ enemy.magical_attack }}</span>
+                        </div>
+                        <div class="stat">
+                            <img src="{{ url_for('static', filename='icons/magical defense.jpg') }}" alt="Magical Defense Icon">
+                            <span>Magical Defense: {{ enemy.magical_defense }}</span>
+                        </div>
+                    </div>
+                    <div class="enemy-textbox">
+                        {{ enemy.useful_info }}
+                    </div>
+                    <button class="select-button">Select</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
