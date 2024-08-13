@@ -28,6 +28,8 @@ class FillerClass():
                 cwd = os.getcwd()
                 directory = os.path.dirname(f"{cwd}/app/assets/enemies/zone_1/{enemy_name}/")
                 list_of_icons = []
+                if len(os.listdir(directory)) == 0:
+                        return ""
                 for name in os.listdir(directory):
                         if name[-4:] == ".png":
                                 list_of_icons.append(name[:-4])
