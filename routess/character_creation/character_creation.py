@@ -1,6 +1,6 @@
 from flask import render_template
 from flask import redirect, url_for, request, session, flash
-
+import sqlalchemy as sa
 from app.character_models import CharacterClass
 
 def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, create_class_instance) -> None:
@@ -103,8 +103,14 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
             try:
                 selected_class_object = character.session_remembering[character.selected_class_string]
                 character_name = request.form.get('character_name')
-                print(character_name)
-                character.name = character_name
+                query = sa.select(CharacterClass).where(CharacterClass.name == character_name)
+                print(query)
+                name = list(db.session.scalars(query))
+                print(name)
+                if name != []:
+                    flash("That name allready exists!", "error")
+                else:
+                    character.name = character_name
             except KeyError:
                 flash("Before naming select class first!", "error")
                 redirect(url_for("char_creation.choose_class"))
@@ -167,9 +173,11 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
                                     physical_defense = character.physical_defense,
                                     magical_defense = character.magical_defense,
                                     hp = character.hp,
+                                    current_hp = character.hp,
                                     #HIDDEN STATS
                                     exp_rate = character.exp_rate,
-                                    critical_chance = 0,)
+                                    critical_chance = 0,
+                                                )
         
         db.session.add(database_class)
         db.session.commit()
