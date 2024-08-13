@@ -6,6 +6,7 @@ from typing import Optional
 from datetime import datetime, timezone
 
 class CharacterClass(db.Model):
+    #Kad hoces da dodas ili promeni neku kolonu VIDI DA LI TREBA I U FAZI GDE INICIJALIZUJES PODATKE ZA OVU KLASU
     character_selected = None
     id: so.Mapped[int] = so.mapped_column(primary_key=True, unique=True)
     name: so.Mapped[str] = so.mapped_column(sa.String(12), unique=True, index=True)
@@ -13,10 +14,8 @@ class CharacterClass(db.Model):
     icon: so.Mapped[str] = so.mapped_column()
     level: so.Mapped[int] = so.mapped_column()
     class_name: so.Mapped[str] = so.mapped_column()
-    character_created: so.Mapped[datetime] = so.mapped_column(
-        default=lambda: datetime.now(timezone.utc)
-    )
-
+    current_exp: so.Mapped[int] = so.mapped_column(default=0)
+    
     #BASE STATS
     stats_STR: so.Mapped[int] = so.mapped_column()
     stats_AGI: so.Mapped[int] = so.mapped_column()
@@ -31,10 +30,18 @@ class CharacterClass(db.Model):
     physical_defense: so.Mapped[int] = so.mapped_column()
     magical_defense: so.Mapped[int] = so.mapped_column()
     hp: so.Mapped[int] = so.mapped_column()
-    
+    current_hp: so.Mapped[int] = so.mapped_column(default=hp)
+
     #HIDDEN STATS:
     exp_rate: so.Mapped[int] = so.mapped_column()
     critical_chance: so.Mapped[int] = so.mapped_column()
+    character_created: so.Mapped[datetime] = so.mapped_column(
+        default=lambda: datetime.now(timezone.utc)
+    )
+    current_zone: so.Mapped[str] = so.mapped_column(default="zone_1")
+    current_zone_encounter: so.Mapped[str] = so.mapped_column(default="encounter_1")
+    
+
 
 
 
