@@ -1,20 +1,21 @@
 from flask import Flask
 from config import Config
+from flask_migrate import Migrate
+
+##### my files related imports
+from app.tresh_hold_for_classes import Treshold
 from app.stats_generator import Stats
 from app.text.non_combat_text.DESCRIPTION_character_creation import NonCombatText
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from app.tresh_hold_for_classes import Treshold
-#from app.Utility.new_anotation_types import routing_url
 from app.character_classes import Knight, Rouge, Druid
 from app.character_classes import Character
 
-#BluePrints import
 
-
-
-
-
+######## sqlalchemy related imports
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker, scoped_session
+from flask_sqlalchemy import SQLAlchemy
+from app.battle.battlefield import Battlefild
+from app.enemies.enemies import Enemy
 
 
 app = Flask(__name__, static_folder='assets')
@@ -22,18 +23,23 @@ app.config.from_object(Config)
 app.static_folder = app.config['STATIC_FOLDER']
 
 
-
-
 stats = Stats()
 treshold = Treshold()
 non_combat_text = NonCombatText()
 character  = Character(stats.STRENGTH, stats.AGILITY, stats.INTELLIGENCE, stats.WISDOM, stats.CONSTITUTION)
-
-
+battlefield = Battlefild()
+enemy = Enemy()
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 migrate.init_app(app, db)
 
+#Needed for connection managment with the database
+engine = create_engine("sqlite:///app.db")
+
+#for current in session managment
+session_factory = sessionmaker(bind=engine)
+Session = scoped_session(session_factory)
+app.session = Session
 
 list_of_classes = {"Knight": Knight,
                     "Rouge": Rouge,
@@ -71,7 +77,6 @@ app.register_blueprint(bp_zone_1)
 #############################################3
 
 from app import stats_generator, stats, treshold, create_class_instance 
-from app import non_combat_text, character_models, character
-
+from app import non_combat_text, character_models, character, battlefield, enemy
 
 #from app import routing_url
