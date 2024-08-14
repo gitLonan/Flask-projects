@@ -9,7 +9,8 @@ class Treshold():
     def __init__(self):
         self.classes = {"Knight": {"str": 10,},
                         "Rouge": {"agi": 12},
-                        "Druid": {"wis": 12, "int": 12}
+                        "Druid": {"wis": 12, "int": 12},
+                        "Mage": {"wis":10, "int": 10},
                         }
 
 

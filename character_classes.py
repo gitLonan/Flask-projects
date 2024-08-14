@@ -110,3 +110,19 @@ class Druid(Character):
     
     def get_description(self):
         return self.description
+    
+class Mage(Character):
+    def __init__(self, *args, **kwargs):
+        super().__init__( *args, **kwargs)
+
+        self.description = "The wizard of Oz"
+        self.class_name = self.__class__.__name__
+
+    def add_class_specific_stats(self, character):
+        if character.cookie == 1:
+            character.magical_attack += 25
+            character.exp_rate += 0.1
+            character.cookie = 0
+    
+    def get_description(self):
+        return self.description

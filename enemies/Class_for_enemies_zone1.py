@@ -1,6 +1,7 @@
 import random
 import os
 from typing import Callable
+
 class FillerClass():
         """ Holds class variables and class methods that are shareable with every class in this file"""
         def __init__(self):             
