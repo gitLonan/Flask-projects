@@ -5,14 +5,13 @@ from app.character_models import CharacterClass
 
 def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, create_class_instance) -> None:
     """
-    Parameters:
+    Args:
         class: blueprint_bp - blueprint created in the init file in this folder                                                      
         class: character - instance of super class Character that has all the stats for every class                                        
         db - SQLite Alchemy database                                                                                 
-        class: stats -  instance of class Stats thats generates stats during character creation                                                                       
+        class: stats -  instance of class Stats that generates stats during character creation                                                                       
         class: non_combat_text - gets diffeerent texts that are present in character creation                               
-        class: treshold - returns list of classes that the given stats meet the treshold                                     
-        func: create_class_instance                                         
+        class: treshold - returns list of classes that the given stats meet the treshold                                                                             
     """
 
     @blueprint_bp.route("/character_creation", methods = ["GET", "POST"])
@@ -30,7 +29,11 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
 
     @blueprint_bp.route('/update_stat/<stat>/<action>', methods=["GET", 'POST'])
     def update_stat(stat=None, action=None): 
-        """ Handels increase and descreas of stats when creating character through HTTP POST method """
+        """ Handels increase and descreas of stats when creating character through HTTP POST method 
+        Args:
+            stat (class variable): variable thats selected for increment or decrement
+            action (str): + or - button that was pressed on the template 
+        """
         
         print(f"Received action: {action} for stat: {stat}")
         if action == "increment":
@@ -44,7 +47,7 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
 
     @blueprint_bp.route('/reroll', methods=["POST"])
     def reroll():
-        """Handles rerolling stats."""
+        """ Sets avaliable_random_gen = True, so when it redirects to the main template the stats will be re-rolled """
         stats.avaliable_random_gen = True
         return redirect(url_for('char_creation.character_creation'))
 
@@ -65,7 +68,7 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
 
     @blueprint_bp.route('/choose_class', methods = ["POST", "GET"])
     def choose_class():
-        """ Func that handels class, icon selection and description writing"""
+        """ Handles selection of the playable class, it's name and it's description"""
         
         classes = treshold.get_list_of_available_classes(character)
         selected_class_object = character

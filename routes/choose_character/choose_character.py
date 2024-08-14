@@ -3,7 +3,11 @@ from app.character_models import CharacterClass
 import sqlalchemy as sa
 
 def init_routes(blueprint_bp, db) -> None:
-
+    """
+    Args:
+        class: blueprint_bp - blueprint created in the init file in this folder                                                                                            
+        db - SQLite Alchemy database                                                                                                                                                             
+    """
     @blueprint_bp.route("/choose_character")
     def characters():
         """
@@ -40,7 +44,7 @@ def init_routes(blueprint_bp, db) -> None:
     
     @blueprint_bp.route("/delete_character", methods = ["POST"])
     def delete_character():
-
+        """ Deletes the character after pressing button delete on the template """
         id_to_delete = request.form.get("delete_id")
         query = sa.delete(CharacterClass).where(CharacterClass.id == id_to_delete)
         db.session.execute(query)

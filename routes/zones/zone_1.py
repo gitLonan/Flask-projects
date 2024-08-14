@@ -5,8 +5,13 @@ from flask import current_app
 from app import battlefield, enemy
 
 
-def init_routes(bp_zone_1, character, db):
+def init_routes(bp_zone_1):
+    """ Outer func is needed for importing into local __init__ file soo I can app.register_blueprint in the main __init__
 
+    Args:
+        bp_zone_1 (class)- blueprint created in the init file in this folder                                                      
+                                         
+    """
     @bp_zone_1.route("/first_city", methods=["GET", "POST"])
     def first_city():
         if CharacterClass.character_selected == None:
@@ -15,12 +20,13 @@ def init_routes(bp_zone_1, character, db):
     
     @bp_zone_1.route("/random_encounter", methods=["POST", "GET"])
     def random_encounter():
+        """ Loads character from session, loads enemies and registers them with the battlefield class for further battle computing"""
         session = current_app.session
         character = session.query(CharacterClass).filter_by(name=CharacterClass.character_selected).first()
         
         enemy_in_battle = enemy.get_enemy_or_enemies(character.current_zone)
         for i in enemy_in_battle:
-            i.set_original_stats()
+            i.finialize_enemy(i)
 
 
         #da li ovako da ostavim ili da menjam, prednost je sto zapravo vidis sta se salje u template i nekako je preglednije, a mana je sto je nekako

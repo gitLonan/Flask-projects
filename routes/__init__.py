@@ -1,5 +1,9 @@
 from flask import Blueprint
 
+"""
+File for creating blueprints that will be registerd in the main app.__init__ file 
+
+"""
 
 def main_menu_bp(*args, **kwargs) -> Blueprint:
     bp_main_menu = Blueprint('routess', __name__)
@@ -28,7 +32,7 @@ def choose_character(*args, **kwargs) -> Blueprint:
 def zone_1(*args, **kwargs) -> Blueprint:
     bp = Blueprint("zone_1", __name__)
     from .zones.zone_1 import init_routes
-    init_routes(bp, *args, **kwargs)
+    init_routes(bp)
     return bp
 
 

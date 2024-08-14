@@ -3,7 +3,12 @@ from flask import redirect, url_for, request, session, flash
 
 
 def init_routes(blueprint_bp, stats, non_combat_text) -> None:
-
+    """
+    Args:
+        class: blueprint_bp - blueprint created in the init file in this folder                                                                                                                                                       
+        class: stats -  instance of class Stats that generates stats during character creation                                                                       
+        class: non_combat_text - gets diffeerent texts that are present in character creation                                                                
+    """
     @blueprint_bp.route('/select_difficulty', methods=["POST", "GET"])
     def select_difficulty():
         if request.method == "GET":
