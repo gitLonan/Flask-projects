@@ -15,7 +15,6 @@ body {
     justify-content: space-between;
     width: 90%;
     height: 90%;
-    
     padding: 20px;
     border-radius: 15px;
 }
@@ -45,24 +44,23 @@ body {
 
 .character-main, .enemy-main {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* Align items to the start */
     align-items: center;
 }
 
 .icon-container  img.character-image{
-    
         flex-shrink: 0;
         width: 180px;
         height: 180px;
-        border: 2px solid #010008;
+        border: 2px solid #000d04;
         margin-right: 10px;
 }
 
 .icon-container img.enemy-icon {
-    flex-shrink: 0;
+        flex-shrink: 0;
         width: 180px;
         height: 180px;
-        border: 2px solid #010008;
+        border: 2px solid #000d04;
         margin-right: 10px;
 }
 
@@ -76,6 +74,7 @@ body {
     width: 30px; /* Adjust the width as needed */
     height: 30px; /* Adjust the height as needed */
     margin-right: 5px; /* Space between icon and text */
+    text-align: left;
 }
 
 .character-name,
@@ -88,8 +87,8 @@ body {
 }
 
 .enemy-name,
-.enemy-hp-bar
- {
+.enemy-hp-bar,
+.exp-bar {
     text-align: left;
     margin: 0 auto 5px 50px; /* Optional: Adds space to the bottom and centers horizontally */
     display: flex;
@@ -100,6 +99,8 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 5px;
+    text-align: left;
+    
     
 }
 
@@ -137,8 +138,9 @@ button:hover {
 .character-actions {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
-    
+    margin-top: 2px;
+    font-size: 13px; /* Reduced font size */
+    padding: 8px 16px; /* Reduced padding */
 }
 
 .enemy-textbox {
@@ -161,6 +163,7 @@ button:hover {
 .enemy-container .stat {
     font-size: 14px; /* Reduced from original */
     white-space: nowrap; /* Prevents the text from breaking into two lines */
+    text-align: left;
 }
 
 .character-container .character-name,
@@ -183,10 +186,21 @@ button:hover {
 
 /* Adjust button sizes */
 .character-container .inventory-button,
-.character-container .cast-spell-button,
-.enemy-container .select-button {
+.character-container .cast-spell-button{
     font-size: 13px; /* Reduced font size */
     padding: 8px 16px; /* Reduced padding */
+}
+.character-actions .attack-button {
+    font-size: 13px; /* Reduced font size */
+    padding: 8px 16px; /* Reduced padding */
+    margin-top: 0px;
+}
+
+.enemy-container .select-button{
+    font-size: 13px; /* Reduced font size */
+    padding: 8px 16px; /* Reduced padding */
+    margin-left: 40px;
+    
 }
 
 /* Adjust container sizes */
@@ -198,9 +212,4 @@ button:hover {
 .enemy-container {
     padding: 10px; /* Reduced padding */
     max-width: 500px; /* Slightly smaller max-width */
-}
-
-.character-actions .attack-button{
-    font-size: 13px; /* Reduced font size */
-    padding: 8px 16px; /* Reduced padding */
 }
