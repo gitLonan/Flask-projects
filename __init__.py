@@ -23,6 +23,7 @@ app.config.from_object(Config)
 app.static_folder = app.config['STATIC_FOLDER']
 
 
+
 stats = Stats()
 treshold = Treshold()
 non_combat_text = NonCombatText()
@@ -56,7 +57,8 @@ def create_class_instance(class_name, *args, **kwargs):
 
 #####    BluePrint Register ################
 
-from app.routess import main_menu_bp, character_creation, difficulty_settings, choose_character, zone_1
+
+from app.routes import main_menu_bp, character_creation, difficulty_settings, choose_character, zone_1
 bp_main_menu = main_menu_bp(stats)
 app.register_blueprint(bp_main_menu)
 
