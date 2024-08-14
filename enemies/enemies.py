@@ -1,4 +1,4 @@
-from app.enemies.Class_for_enemies_zone1 import Bandit, Peasant
+from app.enemies.Class_for_enemies_zone1 import Bandit, Peasant, Knight, Wizard
 import random
 
 
@@ -11,9 +11,11 @@ class Enemy():
         self.enemies_in_combat = []
 
         self.ZONE = {"zone_1": {"Bandit": Bandit,
-                             "Peasant":Peasant,}
-                            # "Guard":0,
-                            # "Wizard":0,}
+                             "Peasant":Peasant,
+                             "Knight":Knight,
+                             "Wizard":Wizard,},
+                    "zone_2": {},
+                    "zone_3": {},
         }
     def create_enemy_instance(self, enemy_name, zone, *args, **kwargs) -> object:
         """ Creates instance of the enemy classes"""
@@ -27,7 +29,7 @@ class Enemy():
     def get_enemy_or_enemies(self, zone) -> list:
             """ Get a list of class instances of enemies that will be in battle """
             self.enemies_in_combat = []
-            num_of_enemies = random.randint(1,5)
+            num_of_enemies = random.randint(1,2)
             for i in range(num_of_enemies):  
                 rand_enemy_str = random.choice(list(self.ZONE[zone]))
                 rand_enemy_object = self.create_enemy_instance(rand_enemy_str,zone)
