@@ -6,16 +6,16 @@ from flask_migrate import Migrate
 from app.tresh_hold_for_classes import Treshold
 from app.stats_generator import Stats
 from app.text.non_combat_text.DESCRIPTION_character_creation import NonCombatText
-from app.character_classes import Knight, Rouge, Druid
+from app.character_classes import Knight, Rouge, Druid, Mage
 from app.character_classes import Character
-
+from app.enemies.create_get_enemy import CreatGetEnemy
 
 ######## sqlalchemy related imports
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, scoped_session
 from flask_sqlalchemy import SQLAlchemy
 from app.battle.battlefield import Battlefild
-from app.enemies.enemies import Enemy
+
 
 
 app = Flask(__name__, static_folder='assets')
@@ -29,7 +29,9 @@ treshold = Treshold()
 non_combat_text = NonCombatText()
 character  = Character(stats.STRENGTH, stats.AGILITY, stats.INTELLIGENCE, stats.WISDOM, stats.CONSTITUTION)
 battlefield = Battlefild()
-enemy = Enemy()
+get_enemy = CreatGetEnemy()
+
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 migrate.init_app(app, db)
@@ -44,7 +46,8 @@ app.session = Session
 
 list_of_classes = {"Knight": Knight,
                     "Rouge": Rouge,
-                    "Druid": Druid,}
+                    "Druid": Druid,
+                    "Mage": Mage,}
 
 def create_class_instance(class_name, *args, **kwargs):
         """ Creates instance of the class that the player chose"""
@@ -79,6 +82,6 @@ app.register_blueprint(bp_zone_1)
 #############################################3
 
 from app import stats_generator, stats, treshold, create_class_instance 
-from app import non_combat_text, character_models, character, battlefield, enemy
+from app import non_combat_text, character_models, character, battlefield, get_enemy
 
 #from app import routing_url

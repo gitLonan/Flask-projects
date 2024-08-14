@@ -2,7 +2,7 @@ from flask import render_template,redirect, url_for
 from app.character_models import CharacterClass
 import sqlalchemy as sa
 from flask import current_app
-from app import battlefield, enemy
+from app import battlefield, get_enemy
 
 
 def init_routes(bp_zone_1):
@@ -24,7 +24,7 @@ def init_routes(bp_zone_1):
         session = current_app.session
         character = session.query(CharacterClass).filter_by(name=CharacterClass.character_selected).first()
         
-        enemy_in_battle = enemy.get_enemy_or_enemies(character.current_zone)
+        enemy_in_battle = get_enemy.get_enemy_or_enemies(character.current_zone)
         for i in enemy_in_battle:
             i.finialize_enemy(i)
 

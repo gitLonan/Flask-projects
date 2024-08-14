@@ -3,7 +3,7 @@ import random
 
 
 
-class Enemy():
+class CreatGetEnemy():
     """ Responsible for creating instances of enemy classes and returning a list of enemies that will be used in battle"""
     def __init__(self):
         
