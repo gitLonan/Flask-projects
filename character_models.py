@@ -4,10 +4,17 @@ import sqlalchemy.orm as so
 from app import db
 from typing import Optional
 from datetime import datetime, timezone
+from sqlalchemy.orm import Mapped
+from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.ext.mutable import MutableList
+from sqlalchemy import Column, String, Integer, JSON
 
 class CharacterClass(db.Model):
     #Kad hoces da dodas ili promeni neku kolonu VIDI DA LI TREBA I U FAZI GDE INICIJALIZUJES PODATKE ZA OVU KLASU
     character_selected = None
+
+    current_list_enemies: so.Mapped[list[str]] = so.mapped_column(MutableList.as_mutable(JSON), default=[])
+
     id: so.Mapped[int] = so.mapped_column(primary_key=True, unique=True)
     name: so.Mapped[str] = so.mapped_column(sa.String(12), unique=True, index=True)
     description: so.Mapped[Optional[str]] = so.mapped_column(sa.String(30))

@@ -16,6 +16,7 @@ class Character():
         self.medium_coefficient = 0.7
         self.lower_coefficient = 0.3
 
+        #Character creation
         self.name = ""
         self.class_name = ""
         self.description = ""
@@ -24,6 +25,9 @@ class Character():
         self.class_instance = None
         self.session_remembering = {}
         self.cookie = 1
+
+        #Battle
+        
 
         self.physical_attack = 0
         self.physical_defense = 0
