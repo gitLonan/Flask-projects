@@ -1,7 +1,7 @@
 from app.enemies.Class_for_enemies_zone1 import Bandit, Peasant, Knight, Wizard
 import random
 
-
+from app.enemies.enemy_id_storage import Id
 
 class CreatGetEnemy():
     """ Responsible for creating instances of enemy classes and returning a list of enemies that will be used in battle"""
@@ -18,16 +18,25 @@ class CreatGetEnemy():
                     "zone_2": {},
                     "zone_3": {},
         }
-    def create_enemy_instance(self, enemy_name: str, zone: str, *args, **kwargs) -> object:
-        """ Creates instance of the enemy classes"""
+    def create_enemy_instance(self, enemy_name: str, current_zone: str, *args, **kwargs) -> object:
+        """ Creates instance of the enemy classes
+            Args:
+                enemy_name (str) - currently by name its reffering to the name of the class(because the name is set with __class_.__name__), check if its still like that
+                current_zone (str) - where character is
+        """
         
-        selected_class_object = self.ZONE[zone][f'{enemy_name}']
-        print("SELECTED CLASS OBJECT", selected_class_object)
+        selected_class_object = self.ZONE[current_zone][f'{enemy_name}']
         if selected_class_object:
-            return selected_class_object(*args, **kwargs)
+            enemy = selected_class_object(*args, **kwargs)
+            enemy_id = random.randint(1,500)
+            while enemy_id not in Id.get_list_id(Id):
+                 enemy_id = random.randint(1,500)
+                 Id.id_list.append(enemy_id)
+            enemy.id = enemy_id
+            return enemy
         return None
         
-    def get_enemy_or_enemies(self, zone: str) -> list:
+    def get_enemy_or_enemies(self, current_zone: str) -> list:
             """ Gets a list of class instances of enemies that will be in battle 
                 Args:
                     zone (str): gets character.current_zone from database (such as zone_1, zone_2...)
@@ -35,10 +44,10 @@ class CreatGetEnemy():
                     list[enemies created for battle]: instances of classes that represent enemies 
             """
             self.enemies_in_combat = []
-            num_of_enemies = random.randint(1,2)
+            num_of_enemies = random.randint(2,3)
             for i in range(num_of_enemies):  
-                rand_enemy_str = random.choice(list(self.ZONE[zone]))
-                rand_enemy_object = self.create_enemy_instance(rand_enemy_str,zone)
+                rand_enemy_str = random.choice(list(self.ZONE[current_zone]))
+                rand_enemy_object = self.create_enemy_instance(rand_enemy_str,current_zone)
                 self.enemies_in_combat.append(rand_enemy_object)
-            print(self.enemies_in_combat)
+            #print(self.enemies_in_combat)
             return self.enemies_in_combat

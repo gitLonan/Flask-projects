@@ -21,10 +21,12 @@ class FillerClass():
                 self.spells = {}
 
                 self.enemy_icon = ''
-
-                self.high_coefficient = 1
-                self.medium_coefficient = 0.7
-                self.lower_coefficient = 0.3
+                self.id = None
+                
+                #for derived stats
+                self.high_coefficient = 0.8
+                self.medium_coefficient = 0.5
+                self.lower_coefficient = 0.2
 
         def get_icon(self, enemy_name: str) -> str:
                 """ Gets random Icon for the enemy name given to the func
@@ -48,7 +50,7 @@ class FillerClass():
         
         def set_original_stats(self) -> None:
                 """ Sets derived stats that are based on base stats such as str, int..."""
-                self.physical_attack = round(self.str * self.high_coefficient*10)
+                self.physical_attack = round(self.str * self.medium_coefficient*10)
                 self.physical_defense = round(self.con * self.medium_coefficient*10 + self.str * self.lower_coefficient*10)
                 self.speed = round(self.agi * self.medium_coefficient*10)
                 self.max_hp = round(self.con * self.high_coefficient*10 + self.str * self.lower_coefficient*10)
@@ -68,6 +70,10 @@ class FillerClass():
                 object.set_original_stats()
                 object.set_exp_gain_value()
                 return
+        #this is regular, i could change by adding this func to any class 
+        def get_att_after_res_applied(self, character):
+                attack = character.physical_attack - character.physical_attack*(self.physical_defense/100)
+                return attack
         
 class Bandit(FillerClass):
         def __init__(self,*args, **kwargs):
@@ -86,6 +92,9 @@ class Bandit(FillerClass):
                 exp = random.randint(7,14)
                 self.worth_exp = exp
                 
+        def get_att_after_res_applied(self, character):
+                attack = character.physical_attack
+                return attack
         
 class Peasant(FillerClass):
         def __init__(self,*args, **kwargs):
