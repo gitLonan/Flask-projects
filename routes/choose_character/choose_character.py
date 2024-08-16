@@ -2,7 +2,7 @@ from flask import render_template, redirect, request, url_for
 from app.character_models import CharacterClass
 import sqlalchemy as sa
 from app.usersCharacter.loading_from_db import LoadingDB
-from app import character
+from app import character, battlefield
 
 def init_routes(blueprint_bp, db) -> None:
     """
@@ -22,7 +22,7 @@ def init_routes(blueprint_bp, db) -> None:
         if playable_characters == []:
             return redirect(url_for("routess.main_screen"))
         
-        
+        battlefield.battle_already_ready = False
         return render_template('main_menu/character.html', title='Character Fight', characters=playable_characters, selected_character_id=chosen_char)
     
     @blueprint_bp.route("/selected_character", methods = ["POST"])
