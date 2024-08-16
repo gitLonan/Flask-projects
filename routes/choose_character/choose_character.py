@@ -13,7 +13,7 @@ def init_routes(blueprint_bp, db) -> None:
         """
         Generate all the created characters and you can choose which you want to play
         """
-        chosen_char = 0
+        chosen_char = ""
         if CharacterClass.character_selected is not None:
             chosen_char = CharacterClass.character_selected
             print(chosen_char)
@@ -34,7 +34,7 @@ def init_routes(blueprint_bp, db) -> None:
             
             query = sa.select(CharacterClass)
             playable_characters = list(db.session.scalars(query).all())
-            print(CharacterClass.character_selected, playable_characters)
+            #print(CharacterClass.character_selected, playable_characters)
             CharacterClass.character_selected = chosen_char
             
             if playable_characters == []:
@@ -49,5 +49,5 @@ def init_routes(blueprint_bp, db) -> None:
         query = sa.delete(CharacterClass).where(CharacterClass.id == id_to_delete)
         db.session.execute(query)
         db.session.commit()
-        print("radi", id_to_delete)
+        #print("radi", id_to_delete)
         return redirect(url_for("choose_character.characters"))
