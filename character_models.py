@@ -13,7 +13,8 @@ class CharacterClass(db.Model):
     #Kad hoces da dodas ili promeni neku kolonu VIDI DA LI TREBA I U FAZI GDE INICIJALIZUJES PODATKE ZA OVU KLASU
     character_selected = None
     attack_type = ''
-    current_list_enemies: so.Mapped[list[str]] = so.mapped_column(MutableList.as_mutable(JSON), default=[])
+
+    
 
     id: so.Mapped[int] = so.mapped_column(primary_key=True, unique=True)
     name: so.Mapped[str] = so.mapped_column(sa.String(12), unique=True, index=True)
@@ -48,7 +49,8 @@ class CharacterClass(db.Model):
     current_zone: so.Mapped[str] = so.mapped_column(default="zone_1")
     current_zone_encounter: so.Mapped[str] = so.mapped_column(default="encounter_1")
     
-
+    def commit():
+      return db.session.commit()
 
 
 
