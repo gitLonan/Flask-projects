@@ -22,7 +22,10 @@ class FillerClass():
 
                 self.enemy_icon = ''
                 self.id = None
-                
+
+                #Ovo stoji ovde jer posle zelim da ubacim i spellove, i onda kad kod nasumicno odredi da zeli da napadne ili baci spell ovo ce se menjati u zavisnosti od toga
+                self.type_of_attack = "attack"
+
                 #for derived stats
                 self.high_coefficient = 0.8
                 self.medium_coefficient = 0.5
