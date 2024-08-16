@@ -1,9 +1,10 @@
-from flask import render_template,redirect, url_for
+from flask import render_template,redirect, url_for, request
 from app.character_models import CharacterClass
 import sqlalchemy as sa
 from flask import current_app
 from app import battlefield, get_enemy
-
+from app import db
+from app.battle.settingUpBattle import SettingUpBattle
 
 def init_routes(bp_zone_1):
     """ Outer func is needed for importing into local __init__ file soo I can app.register_blueprint in the main __init__
@@ -16,6 +17,9 @@ def init_routes(bp_zone_1):
     def first_city():
         if CharacterClass.character_selected == None:
             return redirect(url_for("choose_character.characters"))
+        battlefield.selected_enemy_id = ''
+        battlefield.battle_after_speed_check = []
+        battlefield.battle_before_speed_check = []
         return render_template("zone_1/first_city.html")
     
     @bp_zone_1.route("/random_encounter", methods=["POST", "GET"])
@@ -24,15 +28,11 @@ def init_routes(bp_zone_1):
         session = current_app.session
         character = session.query(CharacterClass).filter_by(name=CharacterClass.character_selected).first()
         
-        enemy_in_battle = get_enemy.get_enemy_or_enemies(character.current_zone)
-        for i in enemy_in_battle:
-            i.finialize_enemy(i)
-
+        enemy_in_battle, selected_enemy = SettingUpBattle.setting_up_battle(battlefield)
 
         #da li ovako da ostavim ili da menjam, prednost je sto zapravo vidis sta se salje u template i nekako je preglednije, a mana je sto je nekako
         #nepotrebno sa aspekta koda, ali veca preglednost zvuci kao bas dobra stvar 
-        
-        character = {
+        char = {
             'name': character.name,
             "class": character.class_name,
             'physical_dmg': character.physical_attack,
@@ -50,7 +50,43 @@ def init_routes(bp_zone_1):
             "current_zone": character.current_zone,
             "current_zone_encounter": character.current_zone_encounter
         }
-            
+        battlefield.battle_before_speed_check.append(character)
+        for i in battlefield.current_battle_enemies:
+            battlefield.battle_before_speed_check.append(i)
+        battlefield.speed_check()
+        print(battlefield.battle_after_speed_check)
 
-        return render_template('battle_simulation.html', character=character, enemies=enemy_in_battle)
+        return render_template('battle_simulation.html', character = char, enemies = enemy_in_battle, selected_enemy = selected_enemy)
         
+    @bp_zone_1.route("/selected_enemy", methods=["POST", "GET"])
+    def selected_enemy():
+            character = battlefield.battle_before_speed_check[0]
+        #if battlefield.battle_after_speed_check[battlefield.index].id == character.id:
+            battlefield.selected_enemy = ""
+            enemy_selected = request.form.get("enemy_id")
+            print("OVO GLEDAM", enemy_selected, type(enemy_selected))
+            battlefield.selected_enemy_id = int(enemy_selected)
+            return redirect(url_for("zone_1.random_encounter"))
+        #else: 
+            #return redirect(url_for("zone_1.random_encounter"))
+        
+    @bp_zone_1.route("/attack", methods=["POST", "GET"])
+    def attack():
+        session = current_app.session
+        character = session.query(CharacterClass).filter_by(name=CharacterClass.character_selected).first()
+
+        enemy_id = battlefield.selected_enemy_id
+        current_enemy_object = None
+
+        for enemy in battlefield.current_battle_enemies:
+            if enemy.id == enemy_id:
+                current_enemy_object = enemy
+                break
+        
+        current_enemy_object.current_hp -= character.physical_attack
+        return redirect(url_for("zone_1.dmg_calculations"))
+    
+    @bp_zone_1.route("/dmg_calculations", methods=["POST", "GET"])
+    def dmg_calculations():
+        
+        return redirect(url_for("zone_1.random_encounter"))
