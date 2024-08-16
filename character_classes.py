@@ -27,7 +27,7 @@ class Character():
         self.cookie = 1
 
         #Battle
-        
+        self.type_of_attack = 'attack'
 
         self.physical_attack = 0
         self.physical_defense = 0
