@@ -15,7 +15,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, scoped_session
 from flask_sqlalchemy import SQLAlchemy
 from app.battle.battlefield import Battlefild
-#from app.enemies.enemy_id_storage import Id
+
 
 
 app = Flask(__name__, static_folder='assets')
@@ -29,7 +29,7 @@ treshold = Treshold()
 non_combat_text = NonCombatText()
 character  = Character(stats.STRENGTH, stats.AGILITY, stats.INTELLIGENCE, stats.WISDOM, stats.CONSTITUTION)
 battlefield = Battlefild()
-get_enemy = CreatGetEnemy()
+getEnemy = CreatGetEnemy()
 #stored_enemy_id = Id()
 
 db = SQLAlchemy(app)
@@ -82,6 +82,6 @@ app.register_blueprint(bp_zone_1)
 #############################################3
 
 from app import stats_generator, stats, treshold, create_class_instance 
-from app import non_combat_text, character_models, character, battlefield, get_enemy
+from app import non_combat_text, character_models, character, battlefield, getEnemy
 
 #from app import routing_url
