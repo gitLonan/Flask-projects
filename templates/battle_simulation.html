@@ -59,8 +59,12 @@
                 </div>
                 <div class="exp-bar">EXP: {{ character.exp }}/{{ character.next_level_exp }}</div>
                 <div class="character-actions">
-                    <button class="attack-button">Attack</button>
-                    <button class="attack-button">Escape</button>
+                    <form action="{{ url_for('zone_1.attack') }}" method="POST">
+                        <button class="attack-button">Attack</button>
+                    </form>
+                    <a href="/main_screen">
+                        <button class="attack-button">Escape</button>
+                    </a>
                 </div>
             </div>
             
@@ -69,7 +73,7 @@
         <!-- Right Side: Enemies -->
         <div class="right-side">
             {% for enemy in enemies %}
-            <div class="enemy-container">
+            <div class="enemy-container {% if enemy.id == selected_enemy %}selected-char{% endif %}">
                 <div class="enemy-header">
                     <div class="enemy-name">{{ enemy.name }}</div>
                     <div class="enemy-hp-bar">HP: {{ enemy.current_hp }}/{{ enemy.max_hp }}</div>
@@ -104,8 +108,11 @@
                             <span>Magical Defense: {{ enemy.magical_defense }}</span>
                         </div>
                     </div>
-                    
-                    <button class="select-button">Select</button>
+                    <form action="{{ url_for('zone_1.selected_enemy') }}" method="POST">
+                        <input type="hidden" name="enemy_id" value="{{ enemy.id }}">
+                        <button class="select-button">Select</button>
+
+                    </form>
                 </div>
             </div>
             {% endfor %}

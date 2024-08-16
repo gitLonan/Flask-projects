@@ -33,7 +33,7 @@
             <input type="hidden" name="class_name" value="{{ character.class_name }}">
 
             <img src="{{ url_for('static', filename='classes/' + character.class_name + '/' + character.icon + '.png') }}" alt="{{ character.name }}" class="character-image">
-
+                    
             <div class="character-details">
                 <div class="name-level-container">
                     <div class="level">Level: {{ character.level }}</div>
