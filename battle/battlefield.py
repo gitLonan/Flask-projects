@@ -36,16 +36,23 @@ class Battlefild():
                     self.index += 1
                     return object 
                
-     def hp_reduction(self, entity, type_attack):
-          if type_attack == "attack":
-               self.normal_dmg(entity)
+     def hp_reduction(self, entity, type_attack, char=None):
+          if type_attack == "physical attack":
+               self.normal_dmg(entity, char=None)
 
 
 
-     def normal_dmg(self, entity):
+     def normal_dmg(self, entity, char=None):
           character = self.battle_before_speed_check[0]
-          if entity != character:
-               character.current_hp -= entity.physical_attack
+          character_id = character.id
+
+          if char == None:
+               entity.current_hp -= character.physical_attack
+               if entity.current_hp <= 0:
+                    self.char_and_enemies_in_battle[character_id].remove(entity)
+                    print(self.char_and_enemies_in_battle[character_id])
+          else:
+               char.current_hp -= entity.physical_attack
              
      
      
