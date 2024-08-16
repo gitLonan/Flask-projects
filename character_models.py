@@ -12,7 +12,7 @@ from sqlalchemy import Column, String, Integer, JSON
 class CharacterClass(db.Model):
     #Kad hoces da dodas ili promeni neku kolonu VIDI DA LI TREBA I U FAZI GDE INICIJALIZUJES PODATKE ZA OVU KLASU
     character_selected = None
-
+    attack_type = ''
     current_list_enemies: so.Mapped[list[str]] = so.mapped_column(MutableList.as_mutable(JSON), default=[])
 
     id: so.Mapped[int] = so.mapped_column(primary_key=True, unique=True)

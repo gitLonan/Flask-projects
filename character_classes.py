@@ -33,6 +33,7 @@ class Character():
         self.physical_defense = 0
         self.speed = 0
         self.hp = 0
+        self.current_hp = 0
         self.magical_attack = 0
         self.magical_defense = 0
         self.exp_rate = 1
