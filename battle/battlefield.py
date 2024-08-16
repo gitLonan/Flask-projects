@@ -20,15 +20,32 @@ class Battlefild():
           self.battle_after_speed_check = []
 
      def speed_check(self) -> None:
-        print(self.battle_before_speed_check)
         check = sorted(self.battle_before_speed_check, key=lambda char: char.speed, reverse=True)
         for i in check:
-            print(i)
             self.battle_after_speed_check.append(i)
 
-     def dmg_calculation(self):
-         for object in self.battle_after_speed_check:
-              pass
+     def whos_turn_it_is(self):
+         character = self.battle_before_speed_check[0]
+         
+         while self.battle_after_speed_check[self.index] != len(self.battle_after_speed_check)-1:
+               print("inside whos turn", self.battle_after_speed_check[self.index])
+               if object == character:
+                    self.index +=1
+                    return object
+               else:
+                    self.index += 1
+                    return object 
+               
+     def hp_reduction(self, entity, type_attack):
+          if type_attack == "attack":
+               self.normal_dmg(entity)
+
+
+
+     def normal_dmg(self, entity):
+          character = self.battle_before_speed_check[0]
+          if entity != character:
+               character.current_hp -= entity.physical_attack
              
      
      
