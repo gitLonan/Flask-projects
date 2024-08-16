@@ -2,7 +2,7 @@ from flask import render_template,redirect, url_for, request
 from app.character_models import CharacterClass
 import sqlalchemy as sa
 from flask import current_app
-from app import battlefield, get_enemy
+from app import battlefield, getEnemy
 from app import db
 from app.battle.settingUpBattle import SettingUpBattle
 
@@ -28,7 +28,8 @@ def init_routes(bp_zone_1):
         session = current_app.session
         character = session.query(CharacterClass).filter_by(name=CharacterClass.character_selected).first()
         
-        enemy_in_battle, selected_enemy = SettingUpBattle.setting_up_battle(battlefield)
+        enemy_in_battle, selected_enemy = SettingUpBattle.setting_up_battle(character)
+        SettingUpBattle.sorting_entities_regarding_speed(character)
 
         #da li ovako da ostavim ili da menjam, prednost je sto zapravo vidis sta se salje u template i nekako je preglednije, a mana je sto je nekako
         #nepotrebno sa aspekta koda, ali veca preglednost zvuci kao bas dobra stvar 
@@ -50,25 +51,24 @@ def init_routes(bp_zone_1):
             "current_zone": character.current_zone,
             "current_zone_encounter": character.current_zone_encounter
         }
-        battlefield.battle_before_speed_check.append(character)
-        for i in battlefield.current_battle_enemies:
-            battlefield.battle_before_speed_check.append(i)
-        battlefield.speed_check()
-        print(battlefield.battle_after_speed_check)
-
         return render_template('battle_simulation.html', character = char, enemies = enemy_in_battle, selected_enemy = selected_enemy)
         
     @bp_zone_1.route("/selected_enemy", methods=["POST", "GET"])
     def selected_enemy():
             character = battlefield.battle_before_speed_check[0]
-        #if battlefield.battle_after_speed_check[battlefield.index].id == character.id:
+            print(character)
+        
             battlefield.selected_enemy = ""
             enemy_selected = request.form.get("enemy_id")
-            print("OVO GLEDAM", enemy_selected, type(enemy_selected))
             battlefield.selected_enemy_id = int(enemy_selected)
+
+            entity_for_attacking = battlefield.whos_turn_it_is()
+            if entity_for_attacking == character:
+
+                battlefield.hp_reduction(entity_for_attacking, entity_for_attacking.type_of_attack)
+
             return redirect(url_for("zone_1.random_encounter"))
-        #else: 
-            #return redirect(url_for("zone_1.random_encounter"))
+ 
         
     @bp_zone_1.route("/attack", methods=["POST", "GET"])
     def attack():
@@ -86,7 +86,9 @@ def init_routes(bp_zone_1):
         current_enemy_object.current_hp -= character.physical_attack
         return redirect(url_for("zone_1.dmg_calculations"))
     
-    @bp_zone_1.route("/dmg_calculations", methods=["POST", "GET"])
-    def dmg_calculations():
+    
+
+    @bp_zone_1.route("/enemy_turn", methods=["POST", "GET"])
+    def enemy_turn():
         
         return redirect(url_for("zone_1.random_encounter"))
