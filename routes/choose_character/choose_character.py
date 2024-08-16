@@ -1,6 +1,8 @@
 from flask import render_template, redirect, request, url_for
 from app.character_models import CharacterClass
 import sqlalchemy as sa
+from app.usersCharacter.loading_from_db import LoadingDB
+from app import character
 
 def init_routes(blueprint_bp, db) -> None:
     """
@@ -13,14 +15,14 @@ def init_routes(blueprint_bp, db) -> None:
         """
         Generate all the created characters and you can choose which you want to play
         """
-        chosen_char = ""
-        if CharacterClass.character_selected is not None:
-            chosen_char = CharacterClass.character_selected
-            print(chosen_char)
+        chosen_char = character.name
         query = sa.select(CharacterClass)
         playable_characters = list(db.session.scalars(query).all())
+
         if playable_characters == []:
             return redirect(url_for("routess.main_screen"))
+        
+        
         return render_template('main_menu/character.html', title='Character Fight', characters=playable_characters, selected_character_id=chosen_char)
     
     @blueprint_bp.route("/selected_character", methods = ["POST"])
@@ -29,17 +31,14 @@ def init_routes(blueprint_bp, db) -> None:
 
         if request.method == "POST":
             chosen_char = request.form.get("character_id")
-            
-            #print("gledam", chosen_char, type(chosen_char))
-            
+            character.name = chosen_char
             query = sa.select(CharacterClass)
             playable_characters = list(db.session.scalars(query).all())
-            #print(CharacterClass.character_selected, playable_characters)
             CharacterClass.character_selected = chosen_char
             
             if playable_characters == []:
                 return redirect(url_for("routess.main_screen"))
-            return render_template('main_menu/character.html', title='Character Fight', characters=playable_characters, selected_character_id=chosen_char)
+            return redirect(url_for("choose_character.characters"))
 
     
     @blueprint_bp.route("/delete_character", methods = ["POST"])

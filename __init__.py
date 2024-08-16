@@ -6,15 +6,17 @@ from flask_migrate import Migrate
 from app.tresh_hold_for_classes import Treshold
 from app.stats_generator import Stats
 from app.text.non_combat_text.DESCRIPTION_character_creation import NonCombatText
-from app.character_classes import Knight, Rouge, Druid, Mage
-from app.character_classes import Character
+from app.battle.battlefield import Battlefild
+from app.character_classes import Character, Knight, Rouge, Druid, Mage
 from app.enemies.create_get_enemy import CreatGetEnemy
+#from app.usersCharacter.character_class import Loadself
+
 
 ######## sqlalchemy related imports
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, scoped_session
 from flask_sqlalchemy import SQLAlchemy
-from app.battle.battlefield import Battlefild
+
 
 
 

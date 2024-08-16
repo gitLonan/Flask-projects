@@ -81,7 +81,7 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
                 selected_class_object.add_class_specific_stats(character)
             else:
                 character.cookie = 1
-                #This is where selected_class_objects goes from being character class instance to becoming selected class you chose
+                #This is where selected_class_objects goes from being Character class to instance of a specific class you chose
                 selected_class_object = create_class_instance(character.selected_class_string, stats.STRENGTH, stats.AGILITY, stats.INTELLIGENCE, stats.WISDOM, stats.CONSTITUTION)
                 character.session_remembering[character.selected_class_string] = selected_class_object
                 character.update_stats(stats)
