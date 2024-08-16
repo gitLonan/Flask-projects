@@ -15,7 +15,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, scoped_session
 from flask_sqlalchemy import SQLAlchemy
 from app.battle.battlefield import Battlefild
-
+#from app.enemies.enemy_id_storage import Id
 
 
 app = Flask(__name__, static_folder='assets')
@@ -30,7 +30,7 @@ non_combat_text = NonCombatText()
 character  = Character(stats.STRENGTH, stats.AGILITY, stats.INTELLIGENCE, stats.WISDOM, stats.CONSTITUTION)
 battlefield = Battlefild()
 get_enemy = CreatGetEnemy()
-
+#stored_enemy_id = Id()
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)

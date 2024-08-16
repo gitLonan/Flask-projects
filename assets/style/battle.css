@@ -41,6 +41,13 @@ body {
     border-radius: 15px;
     margin-bottom: 20px;
 }
+.enemy-container.selected-char {
+    /* Apply your desired styles for the selected enemy here */
+    background-color: #767d0c; /* Example: Change background color */
+    border: 2px solid #ff0000; /* Example: Highlight with a red border */
+    box-shadow: 0 0 10px #ff0000; /* Example: Add a glowing effect */
+    /* Add more styles as needed */
+}
 
 .character-main, .enemy-main {
     display: flex;
