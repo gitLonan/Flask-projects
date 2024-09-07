@@ -1,0 +1,17 @@
+DEV LOG.txt
+razmisljanja.txt
+.flaskenv
+config.py
+
+*.pyc
+
+__pycache__/
+
+*.py[cod]
+*$py.class
+.pyc
+
+.pytest_cache
+
+
+
