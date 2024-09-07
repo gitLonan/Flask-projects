@@ -18,7 +18,7 @@ class CharacterClass(db.Model):
 
     id: so.Mapped[int] = so.mapped_column(primary_key=True, unique=True)
     name: so.Mapped[str] = so.mapped_column(sa.String(12), unique=True, index=True)
-    description: so.Mapped[Optional[str]] = so.mapped_column(sa.String(30))
+    description: so.Mapped[Optional[str]] = so.mapped_column(sa.String(30), nullable=True)
     icon: so.Mapped[str] = so.mapped_column()
     level: so.Mapped[int] = so.mapped_column()
     class_name: so.Mapped[str] = so.mapped_column()
@@ -38,7 +38,7 @@ class CharacterClass(db.Model):
     physical_defense: so.Mapped[int] = so.mapped_column()
     magical_defense: so.Mapped[int] = so.mapped_column()
     hp: so.Mapped[int] = so.mapped_column()
-    current_hp: so.Mapped[int] = so.mapped_column(default=hp)
+    current_hp: so.Mapped[int] = so.mapped_column()
 
     #HIDDEN STATS:
     exp_rate: so.Mapped[int] = so.mapped_column()
@@ -49,8 +49,7 @@ class CharacterClass(db.Model):
     current_zone: so.Mapped[str] = so.mapped_column(default="zone_1")
     current_zone_encounter: so.Mapped[str] = so.mapped_column(default="encounter_1")
     
-    def commit():
-      return db.session.commit()
+
 
 
 

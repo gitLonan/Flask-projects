@@ -15,11 +15,9 @@ class Battlefild():
           self.battle_after_speed_check = []
           self.battle_already_ready = False
      
-        
-
      def whos_turn_it_is(self):
          character = self.battle_before_speed_check[0]
-         
+
          while True:
                #print("inside whos turn", self.battle_after_speed_check[self.index], len(self.battle_after_speed_check)-1,  self.index)
                if self.index > len(self.battle_after_speed_check)-1:

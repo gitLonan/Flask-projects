@@ -57,7 +57,7 @@ class Character():
 
     def get_icon_assets(self, object):
         cwd = os.getcwd()
-        print("GLEDAJ", object.name)
+        #print("GLEDAJ", object.name)
         directory = os.path.dirname(f"{cwd}/app/assets/classes/{object.class_name}/")
         #print(directory)
         list_of_icons = []

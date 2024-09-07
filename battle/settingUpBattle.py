@@ -35,7 +35,7 @@ class SettingUpBattle():
                   
                     battlefield.current_battle_enemies = enemy_in_battle
                     
-                    return enemy_in_battle, selected_enemy
+                    return battlefield.char_and_enemies_in_battle[character_id], selected_enemy
                 
             else: 
                 enemy_in_battle = battlefield.char_and_enemies_in_battle[character_id]

@@ -34,10 +34,13 @@ def init_routes(bp_zone_1):
         character = battlefield.char_class
 
         print("CUrrent hp", character.current_hp, character.hp)
-
+        
         enemy_in_battle, selected_enemy = SettingUpBattle.setting_up_battle(character)
+        print("befire speed setting up", enemy_in_battle)
+        
         SettingUpBattle.sorting_entities_regarding_speed(character)
-        character = battlefield.battle_before_speed_check[0]
+        print("after seting up", enemy_in_battle)
+        #character = battlefield.battle_before_speed_check[0]
         
         print("CUrrent hp", character.current_hp, character.hp)
 
