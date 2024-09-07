@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Lands</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/Zone_1(HighLands)/intro.css') }}">
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='zone_1/test.png') }}') no-repeat center center;
+            background-size: contain;
+            background-attachment: fixed;
+            background-size: 100% 100%
+        }
+    </style>
+</head>
+<body>
+    <div class="background-container">
+        <div class="title-container">
+            <h1>High Lands</h1>
+        </div>
+        <div class="button-container">
+            <a href="/random_encounter">
+            <button class="start-button">Start</button></a>
+        </div>
+    </div>
+</body>
+</html>

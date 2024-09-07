@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Difficulty Menu</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/before_the_start/choosing_difficulty.css') }}">
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='background.png') }}') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="difficulty-menu-container 
+    {% if selected_difficulty == 'Baby' %}difficulty-baby{% elif selected_difficulty == 'Easy' %}difficulty-easy{% elif selected_difficulty == 'Normal' %}difficulty-normal{% elif selected_difficulty == 'Hard' %}difficulty-hard{% endif %}">
+    <h1>Difficulty Menu</h1>
+    <div class="buttons">
+        <form action="{{ url_for('difficulty_settings.select_difficulty') }}" method="POST">
+            <div class="button-wrapper">
+                <button type="submit" name="difficulty" value="Baby" class="difficulty-button {% if selected_difficulty == 'Baby' %}selected{% endif %}">Baby</button>
+            </div>
+            <div class="button-wrapper">
+                <button type="submit" name="difficulty" value="Easy" class="difficulty-button {% if selected_difficulty == 'Easy' %}selected{% endif %}">Easy</button>
+            </div>
+            <div class="button-wrapper">
+                <button type="submit" name="difficulty" value="Normal" class="difficulty-button {% if selected_difficulty == 'Normal' %}selected{% endif %}">Normal</button>
+            </div>
+            <div class="button-wrapper">
+                <button type="submit" name="difficulty" value="Hard" class="difficulty-button {% if selected_difficulty == 'Hard' %}selected{% endif %}">Hard</button>
+            </div>
+        </form>
+    </div>
+</div>
+        
+    <div class="tips-container">
+        <h2>Tips</h2>
+        <div id="tip-content">{{ tip_content }}</div>
+            <div class="button-container">
+                <a href="/main_screen" class="menu-link">
+                    <button class="menu-button">Back</button>
+                </a>
+        <form action="{{ url_for('difficulty_settings.next_tip') }}" method="POST" class="next-tip-form">
+            <button type="submit" id="next-tip" class="next-tip-button">Next Tip</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
