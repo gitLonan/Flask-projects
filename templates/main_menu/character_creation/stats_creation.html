@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stats Screen</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/before_the_start/character_stats_allocation.css') }}">
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='background.png') }}') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="stats-container">
+        <div class="stats-and-description">
+            <div class="points-available">
+                Points available to spend: <span class="points-number">{{ character.POINTS }}</span>
+            </div>
+
+            <div class="stat">
+                <div class="stat-name">Strength</div>
+                <div class="stat-number-container">
+                    <form action="{{ url_for('char_creation.update_stat', stat='STRENGTH', action='decrement') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">-</button>
+                    </form>
+                    <div class="stat-number">{{ character.STRENGTH }}</div>
+                    <form action="{{ url_for('char_creation.update_stat', stat='STRENGTH', action='increment') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">+</button>
+                    </form>
+                    
+                </div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-name">Agility</div>
+                <div class="stat-number-container">
+                    <form action="{{ url_for('char_creation.update_stat', stat='AGILITY', action='decrement') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">-</button>
+                    </form>
+                    <div class="stat-number">{{ character.AGILITY }}</div>
+                    <form action="{{ url_for('char_creation.update_stat', stat='AGILITY', action='increment') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">+</button>
+                    </form>
+                    
+                </div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-name">Intelligence</div>
+                <div class="stat-number-container">
+                    <form action="{{ url_for('char_creation.update_stat', stat='INTELLIGENCE', action='decrement') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">-</button>
+                    </form>
+                    <div class="stat-number">{{ character.INTELLIGENCE }}</div>
+                    <form action="{{ url_for('char_creation.update_stat', stat='INTELLIGENCE', action='increment') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">+</button>
+                    </form>
+                    
+                </div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-name">Constitution</div>
+                <div class="stat-number-container">
+                    <form action="{{ url_for('char_creation.update_stat', stat='CONSTITUTION', action='decrement') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">-</button>
+                    </form>
+                    <div class="stat-number">{{ character.CONSTITUTION }}</div>
+                    <form action="{{ url_for('char_creation.update_stat', stat='CONSTITUTION', action='increment') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">+</button>
+                    </form>
+                    
+                </div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-name">Wisdom</div>
+                <div class="stat-number-container">
+                    <form action="{{ url_for('char_creation.update_stat', stat='WISDOM', action='decrement') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">-</button>
+                    </form>
+                    <div class="stat-number">{{ character.WISDOM }}</div>
+                    <form action="{{ url_for('char_creation.update_stat', stat='WISDOM', action='increment') }}" method="POST" class="inline-form">
+                        <button type="submit" class="add-button">+</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="description-section">
+            {{ text | safe }}
+        </div>
+
+        
+    </div>
+    <div class="navigation-buttons">
+        <form action="{{ url_for('char_creation.reroll') }}" method="POST" class="inline-form">
+            <button type="submit" class="re-roll-button">Re-roll</button>
+        </form>
+        <div>
+            <a href="/main_screen">
+            <button class="back-button">Back</button></a>
+            <a href="/setting_class_up">
+            <button class="next-button">Next</button></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

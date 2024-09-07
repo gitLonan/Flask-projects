@@ -1,0 +1,46 @@
+
+.background-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-container {
+    position: absolute;
+    top: 20%;
+    text-align: center;
+}
+
+.title-container h1 {
+    font-size: 72px;
+    font-family: 'Elvish Font', serif; /* You can replace this with a specific elvish-style font if you have one */
+    color: #979f4e;
+    text-shadow: 0 0 20px #333;
+}
+
+.button-container {
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    transform: translateY(-50%);
+}
+
+.start-button {
+    padding: 15px 40px;
+    font-size: 24px;
+    cursor: pointer;
+    border: 2px solid #979f4e;
+    background-color: #333;
+    color: #979f4e;
+    border-radius: 15px;
+    font-family: 'Victorian Font', serif; /* Replace with a Victorian-style font */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.start-button:hover {
+    background-color: #979f4e;
+    color: #333;
+    box-shadow: 0 0 30px rgba(158, 143, 56, 0.8);
+}
