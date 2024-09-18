@@ -1,0 +1,223 @@
+THis is first devlog for this project, i hope this actually gets somewhere, mada mogao bih na srpskom da pisem.
+Ima vec par stvari odradjeno, uglavnom cu se sluziti chat gpt-om za forntend, html i css, jer ako i to uzmem da ucim nikad necu zavrsiti, a cilj mi 
+je da se pozabavim vise backendom nego vizualnim delom, zato GPT radi kao kuca.
+Zasto pravim igricu uz pomoc flask-a ? Jer onako aahhahahahah, zanimljivo, nije bas napravljeno za tako nesto ali je zanimljivo jer ce baratanje sa 
+bazom podataka i dalje biti tu, kao i pravljenje svih API-ajova i tako to i tako to.
+
+ZNACENJE ZNAKOVA: 
+    - * stoji kod "ZA ODRADITI" znaci da je odradjeno u nekim od narednih ili istog dana
+
+
+-ZA ODRADITI:
+        *-treba da implementiram text pored stats-ova, da objasnim neke stvari igracima(nijenda stvar jos uvek nije implementirana xD)
+        *-difficluty menu, da osobe mogu da biraju tezinu, za sad nek to bude samo dodavanje stats-ova, dodavanje vise hp-a i tako to 
+        *-ekran posle generisanje stats-ova, biranje klasa. Bice jebeno odraditi ovaj deo kako treba, bar sa aspekta backend-a
+        -pozadina da se menja u zavisnosti do klase koja je pritisnuta
+        *-implementirati prikazivanje ikona u zavisnosti koja klasa je pritisnuta
+        *-povezati sa bazom podataka sve informacije koje su potrebne
+        *-da se ime i deskripcija resetuju kad zavrsis kreiranje lika
+        *-da ti iskoci upozorenje ako stavis da ima isto ime kao neki postojeci lik 
+        *-flash message ako pokusa da submituje ime pre biranja klase
+        *-sjeban je style za borbu i layout, mora da se jebakas sa chatp gpt - 14.8.2024
+        *-da svaki lik ima svoje protivnike i svoj progres, trenutno bi protivnici bili isti - 15.8.2024
+        -uvesti oduzimanje statsova za klase, ako je npr knight trebalo bi da se oduzima malo u magic attack-u
+        -ubaciti ispod karaktera u battle_simulation prozorce koje ce printovati sva desavanja u borbi, napadi, spelovi i tako 
+        -smisliti i ubaciti koliko physical i magical defense zapravo oduzimaju od napada
+        -implementovati funkcionalnu borbu
+
+        
+-BAGOVI:
+        *- nacin da se protivnici razlikuju tako da ako selektujes jednog bandita da ne selektujes sve bandite koji postoje - 15.8.2024
+
+
+        
+6.7.2024
+    uspeo da implementiram dodavanje atributa u stats-ove kad pravis lika, takodje implementirao da ne mozes da oduzimas atribute manje od 
+    originalnih vrednosti
+
+8.7.2024
+    IMPLEMENTED:
+        -implementirao reroll opciju
+        -implementirao ovo za textove
+
+11.7.2024
+    IMPLEMENTED: 
+        -implementirao difficluty applier na stats, dovoljno robustan da moze da se i doda neki stats i nece polomiti kod
+
+12.7.2024    
+    RAZMISLJANJE:
+        implementiram prvo biranje klasa pa onda sledeci ekran igrac bira ikone i imenuje klasu 
+
+15.7.2024
+    -razmisljao kako i koje statsove da implementiram, pisao malo u fajlu "razmisljanje" koje statsove i racunica za iste, ta racunica ce biti kako 
+        god, mogu da pogledam i na netu ako zatreba ali implementacija treba da bude solidna
+
+23.7.2024
+    IMPLEMENTED:
+        -nije skroz ali imam screen nakon nasumicnih statsova i malo logike, al ovo ce biti najzajebaniji deo najvrv
+        -implementirao derived statsove(neke, mozda sve) sa sve ikonicama
+        -implementirao logiku za odabir klasa u zavisnosti od stats-ova koje imas
+        -description se menja u zavisnosti od klase, ovo naglasavam jer je bilo jako jebeno to uraditi
+
+24.7.2024
+    -IMPLEMENTED:
+        -dodavanje statsova u zavisnosti koju klasu je neko izabrao, mali specificni boostovi u zavisnosti od klase
+
+26.7.2024
+    -IMPLEMENTED:
+        -prikazuje selektovanje ikona, sad korisnik vidi da je odabrao ikonu
+        -treshhold funckija sada moze da uporedi i vise statsova
+        -ubaci Druid klasu, poprilicno se lako ubacuju nove klase, tako da bih rekao da je scalable na kvadrat, za sad XD
+
+    Malo sam se pomucio debagovanjem, bas nije htelo da radi ovo selektovanje ikone, bas sam se namucio. Razlog je bio to sto nisam prvo imao 
+        odgovarajuci pristup, onda sam morao sve da prebacim da ide preko klase, al i dalje nije htelo da se selektuje, al dotle kad sam stigao tu 
+        sam vec provalio da sam samo pogresnu promenljjivu iz html menjao
+    Mislim da ce biti izazovno posle sve ove podatke izbaciti sekvencijalno iz baze i prikazati igracima. Za sad kad se pritisne start ima samo place
+        holderi da bi video da funkcionise scrolanje kad ima vise likova. To sam jos na pocetku odradio xD
+    Takodje treba ubaciti i promenljive koje ce da prate progres osobe u igrici. Damn, bas je do jaja, ovoliko posla a jos nisam ni dosao do samog 
+        gameplay-a xD, ovo se pretvorilo u ozbiljan shit
+
+29.7.2024
+    *-BAGOVI:
+         kad se pri biranju klasa pritisne dugme za submitovanje imena ili deskripcije pojavi error to je jer nije selektovana nijedna 
+                klasa, nakon pritiskanja na klasu sve funkcionise kako treba
+    IMPLEMENTED:
+        -description that is writable by the user
+        -adding to the database character that was created
+        -name that a user can give to the character
+
+30.7.2024
+    -IMPLEMENTED:
+        - sad kad biras likove vidis sve koji su napravljeni, lepo vuce iz baze podataka kao KUCA 
+
+31.7.2024    
+    -IMPLEMENTED:
+        -factory pattern for routes
+
+    Danas sto sam implementirao, uuuuf, posto ce projekat da nastavi da raste i realno routes folder i nije bas pregledan, a postao bi jos 
+        manje kad ubacim borbu i sta sve ne. Zato sam lepo uzeo i pogledao na netu i implementirao factory pattern dizajna, sad je svaka 
+        smislena grupa html fajlova kao i njihovi routovi po blueprintima. Prvi put imam package inside of a package, building that exp. Sad 
+        jedino jos kad bi istestirao sve xD, popravio mini bagove koji postoje to bi bilo lepo ali ono. 
+
+1.8.2024
+    -IMPLEMENTED:   
+        -you can select and delete the characters you created
+
+    Danas sam se isto unistio, dva ipo sata potrosio na bag jer je http request string, a id u bazi podataka int, a ja hteo da uporedjujem nesto....
+        mozak mi se istopio pokusavajuci ali uspeo sam, zbog baga oko selektovanja lika odlucio sam da ipak requestujem ime, a ne id. Jer onda nema 
+        greske ako je id lika preko onoliko koliko trenutno likova ima u bazi podataka, kao nije bitno jer prosto ne gledam taj broj vise. Ovo nema 
+        smisla sta sam napisao ali mozak mi je ono, tako bih rado nastaio da programiram ali ogranicavajuci faktor je laptop, trenutno mu je sjebana
+        baterija i ne moze da bleji van punjaca...to znaci go kurac eto sta znaci, znaci ne mogu da se uvalim i da mi bude comfy....
+    Damn, kad ovako napisem da sam samo to implementirao zvuci bas jadno, gde su meni otisli sati, a da, na jebeni frontend....jebem ti chat gpt.
+    Sad cu mozda poceti o implementaciji igrice zapravo xD, kad odradim prvi combat mislim da ce biti UUUUUFFF
+
+2.8.2024
+    Nek sitnice pisao i resavao, nista veliko
+    
+3.8.2024
+    -IMPLEMENTED
+        -implemneted screen for first city
+
+    Nesto nije htelo kako treba da se renderuje template, ni css fajl nije hteo da radi kako treba, body {} deo u css nije hteo da prikaze i modifikuje
+        pozadinu ali akd bi kod napisao direkt u html onda bi radio i tu sam malo izgubio zivce blago receno. OStavio sam taj deo koda u html jer je 
+        jedino tako hteo da radi. Necu dugo sad, jer ipak treba raditi i mehu 3 i ako stignem u gym mada ajde gym moze da ispasta jer nije hitno
+
+4.8.2024
+        
+    -IMPLEMENTED:
+        -flash messages for description, name and if name allready in the database
+    Popravio bag kod kreiranje likova, sad nema errora kad hoces da imenujes lika ali nisi selektovao klasu
+
+5.8.2024     
+    Danas sam razmisljao i implementirao protivnika/e, odlucio sam se za pristup jedna super klasa koja ce imati sve sto im treba od statsova 
+        tako da nemoram sve da kucam za svakog protivnika al zato svaka klasa ili ti svaki protivnik ce modifikovati statsove na svoj nacin
+        ovo kad budem odradio bice banja, jer ovo je big stick bambuzuld problem, a i mislim da ce veci problem biti layout i dobar css fajl nego 
+        ista drugo, kako bih voleo da ne moram da radim front end jebes mi sve, bas mi se ne uci css i te stvari.
+
+    Bice mogucnost borbi protiv vise protivnika, sto se tice balanca i toga, tesko da cu moci sad da kazem ili odlucim o tome. Verujem da na vizualnom 
+        planu ima dosta nekih suptilnih gresaka koje bi drugi ljudi ukazali kao sto je Kaca ukazala za dodavanje i oduzimanje stats-ova. Sobzirom da 
+        gledam u ovo svaki dan neke stvari koje mozda bodu oci meni ne bodu jer mozda ne zelim da se zanimam time ili prosto mi je "moze da gura" i 
+        onda kad neko ukaze na to skontam da ne moze zapravo xD 
+
+    Sto se tice progresa, za sad odlucio sam da se po levelu exp koji je potreban poveca za 10% svaki put,
+         za drugi lvl nek mora da ubijes otp 10 protivnik. Takodje jedan stat boost po lvl-u zvuci sasvim korektno ? Ne znam koliko je izbalanisrano
+        na to ce najvise uticati protivnici, jer ako su oni ok onda je i ovo ok ali ako oni krenu da postaju previse jaki onda ce morati i lik da se
+        nekako lvlupuje brze ILI ono sto sam mislio, da bude rouge like, da ne bude namenjeno da mozes iz prve da prodjes i pobijes sve. Mada, onda 
+        mora imati i neki razlog za tim rouge like-om, neko ojacavanje mimo samo lvl-a, ali za sad bi moralo da bude samo to.
+        
+6.8.2024
+    -IMPLEMENTED:
+        -background for battles, automated showing in html for that background
+        -character displayed correctly with all needed information
+
+    Danas sam se bakcao sa web stranicom koja ce prikazivati borbu, hvala bogu uspeo sam otp lici na ono sto sam hteo. Trenutno sam u fazi 
+        namestanja da za korisnika i njegovon lika prikazem odgovarajuce podatke, to je cilj 
+
+13.8.2024
+    -IMPLEMENTED:
+        -enemies class that will hold and create all instances of the class enemies
+        -refractorovao mesta za enemies klasu i druge stvari
+        -Now in enemies has an icon it will show it depending of the zone and the enemy
+
+        
+    Radio sam ja i juce i prekljuce al nesto malo, sad sam zapravo odradio nesto sto se moze lepo napisati ovde.
+    Uveo sam Enemy class koja ima funkcije oko dodavanja protivnika i kreiranje istih, ima svoj folder zato sto da ne bih pisao za svaku zonu opet
+    samo ce se u odnosu u kojoj se zoni nalazi igrac drugi protivnici biti kreirani. i to ce sve ici u BattleField klasu koja ce se baviti borbom ?
+    Mozda ni ne mora da postoji iskreno, al videcemo, za sad ne mora da postoji, ali mozda ubacim cisto da ne bi bilo apstraktno ? Videcemo
+
+14.8.2024
+    -IMPLEMENTED
+        -doc strings for func and classes that needed it
+        -added more enemies and their pictures for zone_1
+        -fixed some css and html for battle_simulation
+
+    Kako me smara ovo popravljanje css-a.... o boze izgleda da cu morato da ga naucim bar malo, ovo je krvav posao radeci sa chat gpt-ijem, jedino 
+        ako bas znas sta zelis i treba ti pomoc oko nekih sitnih stvari, cim treba nesto vece i vise odmah stuca i jede govna. Takodje moje 
+        koriscenje nije bas najbolje jer ne znam css i onda jedino sto sam naucio je studiranje i dibagovanje na ovom projektu. Verovanto bi bilo 
+        vise cool da znam sve kako funkcionise i da nije tolika crna magija kao sto jeste trenutno....bilo kako bilo, ide nekako i pokusacu da ne moram 
+        da naucim css xD Mada kurs od par sati nece da skodi ahahhahahahah. Da utonem samo 10h bilo bi dovoljno, ali ja ne zelim da utonem toliko sati xD
+
+15.8.2024
+    -IMPLEMENTED:
+        -Every character has its own enemies and the code remembers who they are during the running of the application
+        -introduced ID for every enemy soo selection of them works correctly
+        -implemented sorting in battle depending on speed
+
+    Trenutno jako iritantan bag, mada ocekivan, javilo mi se jos pre vise dana da ce ovo biti proble. Problem je sto sada kad selektujes npt bandita i ako ima jos neki bandit u trenutnoj
+        borbi i on ce biti selektovan, treba da nadjem nacin da ih nekako indetifikujem, sto mozda i nije toliko tesko, a mozda i jeste xD videcemo aajahahahahah
+    Srecom ovaj bag sam upravo resio, posle 2h rada, prvo sam krenuo full sizo da implementiram id za svakog lika al onda posle dorucka doslo mi iz dupeta u glavu. Implementirao sam dobro
+        sad dok traje sesija (dok osoba ne ugasi igricu) svi protivnici ce imati svoj id i nadam se da ce im ostajati stats, mada nema razloga da ne ostane jer je to ipak instanca kojoj
+        cu samnjivati hp kad ubacim borbu, treba da ubacim u delu ispod karaktera u battle_simulation mali pravougaonik koji ce prikazivati sta se sve desilo u borbi, i da je scrollable
+        to ce biti zanimljiva implementacija, doduse kao i sve ovo do sad ahahahahahhaha 
+    Sad je pitanje kako da odradim koliko physical i magical defense oduzima od napada, i da li da ubacim da mozes da napadnes sa dva napada ? ili samo physiacl da bude napad a magical 
+        attack bude vezan za magije ? svakako da ima smisla da bude ovo drugo, to znaci da %resistanc ne moze da bude isti za magije i za obican napad. Trenutno sto sam smislio je da 
+        svakih 100 poena u odbrani smanjujes napad za 10%, znaci odbrana od 134 bi smanjila za 13.4%, da li je ovo izbalansirano nemam pojma ahahhahaha ali kad introducujem neki sistem
+        bice lakse da menjam parametre, samo treba da vidim da napisem tako da moze da se modifikuje i nadogradjuje
+
+16.8.2024
+    -IMPLEMENTED    
+        -enemies now respawn when all are killed, but give 0 exp for now
+    
+    -BAG:
+        *TRenutni bag, zbog nacina na koji trenutno updatujem i pripremam battlefield za borbu kad se pobede svi protivnici liste koje ne treba da se resetuju se resetuju iz razloga kako se ne 
+            bi beskonacno dodavalo, moram nesto da promenim ili da uradim to sa jos nekom klasom, jer ovo stvarno vise nema smisla
+        Trenutno posto brisem likove kad ih pobedim ono preskoci sa indeksom, tako da mislim da cu morati da smanjim index u tim trenucima kad ubijes protivnika
+        -bag oko kreiranje lika, error pri zavrsetku
+        
+        -GIT INIT NIJE U DOBROM FOLDERU
+
+
+    Malo refractorovao neke funkcije u settingUpBattle i dodao u samoj battefiled neke stvari. Nadam se da sam uspostavio dobru podlogu za adaptibilni kod koji ce uslediti kad ubacim 
+        spellove a i protivnciki potez.
+    POTEZI - sad se bas razmisljam kako to da uradim, imam index koji mi sluzi da idem redom u listi koja je sortovana po brzini svakog entiteta u borbi, trenutno samo igrac moze da napada
+        jos nisam ubacio protivnicke napade, kad to ubacim i ubacim prozorce sa printovanim statmentima sta se desava i to, bice do jaja, stavim sleep od jednu sekundu 
+        cisto da ne lete protivnici. Opet nisam siguran bas kako to da introducujem, kako to automatski da odigra protivnicki potez, mozda sutra na svez mozak nesto smislim. Ali moram 
+        da ogranicim ovaj development na sat-dva dnevno, jer inace necu stici da ucim za poslednji ispit xD
+    
+    
+
+    
+
+        
+
+        
