@@ -24,13 +24,13 @@ class CreatGetEnemy():
                 enemy_name (str) - currently by name its reffering to the name of the class(because the name is set with __class_.__name__), check if its still like that
                 current_zone (str) - where character is
         """
-        
+        #creating instance of the class from dic self.ZONE
         selected_class_object = self.ZONE[current_zone][f'{enemy_name}']
         if selected_class_object:
             enemy = selected_class_object(*args, **kwargs)
-            enemy_id = random.randint(1,500)
+            enemy_id = random.randint(1,1000)
             while enemy_id not in Id.get_list_id(Id):
-                 enemy_id = random.randint(1,500)
+                 enemy_id = random.randint(1,1000)
                  Id.id_list.append(enemy_id)
             enemy.id = enemy_id
             return enemy

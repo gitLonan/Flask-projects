@@ -10,35 +10,36 @@ class SettingUpBattle():
             """ Adds character and its enemies depending on the current zone of that said character
 
             Args:
-                 battlefield (class instance) - deals with the whole battle situation, go in battle/battlefield.py
+                 character (class instance) - deals with the whole battle situation, go in battle/battlefield.py
 
             Explanation:
                 First it checks if the selected character is in dic of battlefield.char_and_enemies_in_battle soo it can track different characters.id during the session of play,
                 than if the character has no enemies they are created and added to the dict. If they do exist than I just get the enemy list from the dic with character.id as its key
 
             """
-            character_id = character.id
+            character_name = character.name
             #dic_of_char_and_its_enemi = battlefield.char_and_enemies_in_battle
             selected_enemy = battlefield.selected_enemy_id
             #checks if selected character is in battle and if he has enemies 
-            if character_id not in battlefield.char_and_enemies_in_battle.keys():
+            if character_name not in battlefield.char_and_enemies_in_battle.keys():
                 battlefield.battle_already_ready = False
-                battlefield.char_and_enemies_in_battle[character_id] = []
+                battlefield.char_and_enemies_in_battle[character_name] = []
                 
-            if battlefield.char_and_enemies_in_battle[character_id] == []:
+            if battlefield.char_and_enemies_in_battle[character_name] == []:
+                    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
                     battlefield.battle_already_ready = False
                     enemy_in_battle = getEnemy.get_enemy_or_enemies(character.current_zone)
-
+                    battlefield.index = 0
                     for i in enemy_in_battle:
                             i.finialize_enemy(i)
-                    battlefield.char_and_enemies_in_battle[character_id] = enemy_in_battle
+                    battlefield.char_and_enemies_in_battle[character_name] = enemy_in_battle
                   
                     battlefield.current_battle_enemies = enemy_in_battle
                     
-                    return battlefield.char_and_enemies_in_battle[character_id], selected_enemy
+                    return battlefield.char_and_enemies_in_battle[character_name], selected_enemy
                 
             else: 
-                enemy_in_battle = battlefield.char_and_enemies_in_battle[character_id]
+                enemy_in_battle = battlefield.char_and_enemies_in_battle[character_name]
                 battlefield.current_battle_enemies = enemy_in_battle
                 return enemy_in_battle, selected_enemy
             
@@ -52,6 +53,7 @@ class SettingUpBattle():
         
         """
         if battlefield.battle_already_ready == False:
+            #battlefield.index = 0
             battlefield.battle_before_speed_check = []
             battlefield.battle_after_speed_check = []
             if character not in battlefield.battle_before_speed_check:

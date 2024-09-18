@@ -75,7 +75,8 @@ class FillerClass():
                 return
         #this is regular, i could change by adding this func to any class 
         def get_att_after_res_applied(self, character):
-                attack = character.physical_attack - character.physical_attack*(self.physical_defense/100)
+                #trenutno svakih 50 def od 150 dodaje 20 reduction dmg, jer trenutno nisam sig da li ovako zelim da kalkulisem
+                attack = self.physical_attack - character.physical_defense*(self.physical_defense/1000)
                 return attack
         
 class Bandit(FillerClass):
@@ -95,9 +96,7 @@ class Bandit(FillerClass):
                 exp = random.randint(7,14)
                 self.worth_exp = exp
                 
-        def get_att_after_res_applied(self, character):
-                attack = character.physical_attack
-                return attack
+        
         
 class Peasant(FillerClass):
         def __init__(self,*args, **kwargs):

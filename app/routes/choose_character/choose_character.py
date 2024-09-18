@@ -35,6 +35,10 @@ def init_routes(blueprint_bp, db) -> None:
             query = sa.select(CharacterClass)
             playable_characters = list(db.session.scalars(query).all())
             CharacterClass.character_selected = chosen_char
+            #Nove linije koda
+            print("Pre loadera",character.physical_attack)
+            LoadingDB.loading_in_info(chosen_char, db)
+            print("Posle loadera",character.physical_attack)
             
             if playable_characters == []:
                 return redirect(url_for("routess.main_screen"))
