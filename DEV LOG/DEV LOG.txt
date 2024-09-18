@@ -202,7 +202,7 @@ ZNACENJE ZNAKOVA:
         *TRenutni bag, zbog nacina na koji trenutno updatujem i pripremam battlefield za borbu kad se pobede svi protivnici liste koje ne treba da se resetuju se resetuju iz razloga kako se ne 
             bi beskonacno dodavalo, moram nesto da promenim ili da uradim to sa jos nekom klasom, jer ovo stvarno vise nema smisla
         Trenutno posto brisem likove kad ih pobedim ono preskoci sa indeksom, tako da mislim da cu morati da smanjim index u tim trenucima kad ubijes protivnika
-        -bag oko kreiranje lika, error pri zavrsetku
+        -*bag oko kreiranje lika, error pri zavrsetku
         
         -GIT INIT NIJE U DOBROM FOLDERU
 
@@ -213,6 +213,14 @@ ZNACENJE ZNAKOVA:
         jos nisam ubacio protivnicke napade, kad to ubacim i ubacim prozorce sa printovanim statmentima sta se desava i to, bice do jaja, stavim sleep od jednu sekundu 
         cisto da ne lete protivnici. Opet nisam siguran bas kako to da introducujem, kako to automatski da odigra protivnicki potez, mozda sutra na svez mozak nesto smislim. Ali moram 
         da ogranicim ovaj development na sat-dva dnevno, jer inace necu stici da ucim za poslednji ispit xD
+
+17.9.2024
+    -IMPLEMENTED
+        -loads character from db when choosing character
+
+    Koliko vremena je proslo, stvarno mi je trebalo malo da se upoznam sa kodom koliko toliko, ne mogu da zamislim za 6 meseci fazon..., takodje bas 
+        ovako vidim koji doc string je imao efekta u mom ponovnom razumevanju koda, a koji nije, treba da poradim na tome, to sigurno.
+
     
     
 
