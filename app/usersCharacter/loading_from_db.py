@@ -1,25 +1,32 @@
 from app import create_class_instance
 from app import character
-
+import sqlalchemy as sa
+from app.character_models import CharacterClass
 
 class LoadingDB():
-    def loading_in_info(database_character):
-        character.str = database_character.stats_STR
-        character.agi = database_character.stats_AGI
-        character.int = database_character.stats_INT
-        character.wis = database_character.stats_WIS
-        character.con = database_character.stats_CON
+    def loading_in_info(char_name, db):
+        query = sa.select(CharacterClass).where(CharacterClass.name == char_name)
+        #print(query)
+        loader = db.session.scalars(query).first()
+        print(loader)
+        character.str = loader.stats_STR
+        character.agi = loader.stats_AGI
+        character.int = loader.stats_INT
+        character.wis = loader.stats_WIS
+        character.con = loader.stats_CON
+
+        
 
         character.high_coefficient = 1
         character.medium_coefficient = 0.7
         character.lower_coefficient = 0.3
 
         #Character creation
-        character.name = database_character.name
-        character.class_name = ''
-        character.description = database_character.description
-        character.selected_icon = database_character.icon
-        character.selected_class_string = database_character.class_name
+        character.name = loader.name
+        character.class_name = loader.class_name
+        character.description = loader.description
+        character.selected_icon = loader.icon
+        character.selected_class_string = loader.class_name
         #character.class_instance = None
         #character.session_remembering = {}
         #character.cookie = 1
@@ -28,11 +35,16 @@ class LoadingDB():
         character.type_of_attack = ''
 
         #Derived stats
-        character.physical_attack = database_character
-        character.physical_defense = database_character
-        character.speed = database_character
-        character.hp = database_character
-        character.current_hp = 0
-        character.magical_attack = database_character
-        character.magical_defense = database_character
-        character.exp_rate = database_character
+        character.physical_attack = loader.physical_attack
+        character.physical_defense = loader.physical_defense
+        character.speed = loader.speed
+        character.hp = loader.hp
+        character.current_hp = loader.current_hp
+        character.magical_attack = loader.magical_attack
+        character.magical_defense = loader.magical_defense
+
+
+        character.exp_rate = loader.exp_rate
+        character.current_zone = loader.current_zone
+        character.current_zone_encounter = loader.current_zone_encounter
+        character.current_exp = loader.current_exp

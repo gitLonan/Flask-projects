@@ -28,6 +28,9 @@ class Character():
 
         #Battle
         self.type_of_attack = 'attack'
+        self.current_zone = ""
+        self.current_zone_encounter = ""
+        self.current_exp = 0
 
         self.physical_attack = 0
         self.physical_defense = 0
@@ -65,6 +68,10 @@ class Character():
                 if name[-4:] == ".png":
                     list_of_icons.append(name[:-4])
         return list_of_icons
+    
+    def get_dmg(self, enemy):
+        attack = self.physical_attack - enemy.physical_defense*(enemy.physical_defense/1000) 
+        return attack
     
         
 class Knight(Character):
