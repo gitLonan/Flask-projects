@@ -35,13 +35,13 @@ def init_routes(bp_zone_1):
         SettingUpBattle.sorting_entities_regarding_speed(character)
   
 
-        entity_for_acction = battlefield.whos_turn_it_is()
-        print("ko je na redu", entity_for_acction)
-        if entity_for_acction == character:
+        entity_for_action = battlefield.whos_turn_it_is()
+        print("ko je na redu", entity_for_action)
+        if entity_for_action == character:
             print("CHARACTER ON ACTION")
             
-        elif entity_for_acction != character:
-            battlefield.enemy_turn(entity_for_acction, character, db)
+        elif entity_for_action != character:
+            battlefield.enemy_turn(entity_for_action, character, db)
             return redirect(url_for("zone_1.random_encounter"))
             
         

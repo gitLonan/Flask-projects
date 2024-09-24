@@ -59,6 +59,7 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
         character.selected_class_string = ''
         character.update_stats(stats)
         character.name = ""
+        character.class_name = ""
         character.description = ""
         character.selected_class_string = ""
         character.selected_icon = ""

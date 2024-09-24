@@ -29,36 +29,34 @@ class Battlefild():
                self.checking_type_attack(enemy, enemy.attack_type, db, character)
 
      def checking_type_attack(self, entity, type_attack, database, character=None):
-          print("OVO JE JAKO BITNO za character", character)
           if entity == None:
                return
           if type_attack == "physical attack":
-               print("USAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
                self.physical_dmg(entity,database, character)
 
 
 
      def physical_dmg(self, entity, database, char=None):
-          print("gledam za char i database", database, char)
-          #print("Ovo je raspored nakon spped check-a", self.battle_after_speed_check)
           character = self.battle_before_speed_check[0]
           character_name = character.name
 
           if char == None:
-               entity.current_hp -= character.physical_attack
+               entity.current_hp -= character.get_dmg(entity)
+               self.index += 1
                if entity.current_hp <= 0:
-                    self.index += 1
-                    #print("pre remove", self.current_battle_enemies)
+                    character.current_exp += entity.worth_exp
+                    character.amount_of_killed_enemies += 1
+                    
                     self.current_battle_enemies.remove(entity)
                     self.battle_after_speed_check.remove(entity)
-                    #print("post remove", self.current_battle_enemies)
+                    print("ovo je u oduzimanju hp-a", self.current_battle_enemies, self.index)
                     self.char_and_enemies_in_battle[character_name] = self.current_battle_enemies
                     
                     
           else:
                self.index += 1
-               print("DMG KOJI PRIMAM",entity.name, entity.physical_attack)
-               char.current_hp -= entity.physical_attack
+               print("DMG KOJI PRIMAM",entity.name, entity.physical_attack, entity.get_dmg(char))
+               char.current_hp -= entity.get_dmg(char)
                
 
      

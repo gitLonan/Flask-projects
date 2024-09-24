@@ -74,9 +74,9 @@ class FillerClass():
                 object.set_exp_gain_value()
                 return
         #this is regular, i could change by adding this func to any class 
-        def get_att_after_res_applied(self, character):
+        def get_dmg(self, character):
                 #trenutno svakih 50 def od 150 dodaje 20 reduction dmg, jer trenutno nisam sig da li ovako zelim da kalkulisem
-                attack = self.physical_attack - character.physical_defense*(self.physical_defense/1000)
+                attack = round(self.physical_attack - character.physical_defense*(self.physical_defense/1000))
                 return attack
         
 class Bandit(FillerClass):
@@ -95,6 +95,7 @@ class Bandit(FillerClass):
         def set_exp_gain_value(self) -> None:
                 exp = random.randint(7,14)
                 self.worth_exp = exp
+                
                 
         
         
