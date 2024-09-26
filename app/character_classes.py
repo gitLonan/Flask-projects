@@ -15,6 +15,7 @@ class Character():
         self.high_coefficient = 1
         self.medium_coefficient = 0.7
         self.lower_coefficient = 0.3
+        self.scale_stats = 2
 
         #Character creation
         self.name = ""
@@ -25,6 +26,10 @@ class Character():
         self.class_instance = None
         self.session_remembering = {}
         self.cookie = 1
+        
+        self.stats_points = 0
+        self.lvl = 1
+        self.exp_for_lvl = self.lvl**3
 
         #Battle
         self.type_of_attack = 'attack'
@@ -43,7 +48,7 @@ class Character():
         self.exp_rate = 1
 
     def get_description(self):
-        return " "
+        pass
     
     def update_stats(self, stats):
         self.str = stats.STRENGTH
@@ -51,13 +56,15 @@ class Character():
         self.int = stats.INTELLIGENCE
         self.wis = stats.WISDOM
         self.con = stats.CONSTITUTION
-
-        self.physical_attack = round(self.str * self.high_coefficient*10)
-        self.physical_defense = round(self.con * self.medium_coefficient*10 + self.str * self.lower_coefficient*10)
-        self.speed = round(self.agi * self.medium_coefficient*10)
-        self.hp = round(self.con * self.high_coefficient*10 + self.str * self.lower_coefficient*10)
-        self.magical_attack = round(self.int * self.high_coefficient*10 + self.wis * self.lower_coefficient*10)
-        self.magical_defense = round(self.int * self.lower_coefficient*10 + self.wis * self.medium_coefficient*10)
+        self.update_derived_stats()
+        
+    def update_derived_stats(self):
+        self.physical_attack = round(self.str * self.high_coefficient*self.scale_stats)
+        self.physical_defense = round(self.con * self.medium_coefficient*self.scale_stats + self.str * self.lower_coefficient*self.scale_stats)
+        self.speed = round(self.agi * self.medium_coefficient*self.scale_stats)
+        self.hp = round(self.con * self.high_coefficient*self.scale_stats + self.str * self.lower_coefficient*self.scale_stats)
+        self.magical_attack = round(self.int * self.high_coefficient*self.scale_stats + self.wis * self.lower_coefficient*self.scale_stats)
+        self.magical_defense = round(self.int * self.lower_coefficient*self.scale_stats + self.wis * self.medium_coefficient*self.scale_stats)
 
     def get_icon_assets(self, object):
         cwd = os.getcwd()
@@ -68,9 +75,17 @@ class Character():
                     list_of_icons.append(name[:-4])
         return list_of_icons
     
+    def next_lvl_exp(self):
+        if self.lvl == 1:
+            self.exp_for_lvl = 8
+        self.exp_for_lvl = (self.lvl+1)**3 - self.current_exp
+
+        
     def get_dmg(self, enemy):
         attack = round(self.physical_attack - enemy.physical_defense*(enemy.physical_defense/1000))
         return attack
+    
+    
     
         
 class Knight(Character):

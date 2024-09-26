@@ -30,6 +30,7 @@ class FillerClass():
                 self.high_coefficient = 0.8
                 self.medium_coefficient = 0.5
                 self.lower_coefficient = 0.2
+                self.scale_stats = 2
 
         def get_icon(self, enemy_name: str) -> str:
                 """ Gets random Icon for the enemy name given to the func
@@ -53,13 +54,13 @@ class FillerClass():
         
         def set_original_stats(self) -> None:
                 """ Sets derived stats that are based on base stats such as str, int..."""
-                self.physical_attack = round(self.str * self.medium_coefficient*10)
-                self.physical_defense = round(self.con * self.medium_coefficient*10 + self.str * self.lower_coefficient*10)
-                self.speed = round(self.agi * self.medium_coefficient*10)
-                self.max_hp = round(self.con * self.high_coefficient*10 + self.str * self.lower_coefficient*10)
+                self.physical_attack = round(self.str * self.medium_coefficient*self.scale_stats)
+                self.physical_defense = round(self.con * self.medium_coefficient*self.scale_stats + self.str * self.lower_coefficient*self.scale_stats)
+                self.speed = round(self.agi * self.medium_coefficient*self.scale_stats)
+                self.max_hp = round(self.con * self.high_coefficient*self.scale_stats + self.str * self.lower_coefficient*self.scale_stats)
                 self.current_hp = self.max_hp
-                self.magical_attack = round(self.int * self.high_coefficient*10 + self.wis * self.lower_coefficient*10)
-                self.magical_defense = round(self.int * self.lower_coefficient*10 + self.wis * self.medium_coefficient*10)
+                self.magical_attack = round(self.int * self.high_coefficient*self.scale_stats + self.wis * self.lower_coefficient*self.scale_stats)
+                self.magical_defense = round(self.int * self.lower_coefficient*self.scale_stats + self.wis * self.medium_coefficient*self.scale_stats)
                 self.enemy_icon = self.get_icon(self.name)
 
         def finialize_enemy(self, object: issubclass) -> None:
@@ -93,7 +94,7 @@ class Bandit(FillerClass):
                 self.con = random.randint(3,8)
 
         def set_exp_gain_value(self) -> None:
-                exp = random.randint(7,14)
+                exp = random.randint(1,4)
                 self.worth_exp = exp
                 
                 
@@ -106,14 +107,14 @@ class Peasant(FillerClass):
                 self.name = self.__class__.__name__
 
         def base_stats_random(self):
-                self.str = random.randint(3,10)
-                self.agi = random.randint(1,9)
-                self.int = random.randint(3,14)
-                self.wis = random.randint(1,15)
+                self.str = random.randint(3,5)
+                self.agi = random.randint(1,6)
+                self.int = random.randint(3,6)
+                self.wis = random.randint(1,7)
                 self.con = random.randint(3,5)
                 
         def set_exp_gain_value(self) -> None:
-                exp = random.randint(2,6)
+                exp = random.randint(1,3)
                 self.worth_exp = exp
                 
 
@@ -132,7 +133,7 @@ class Knight(FillerClass):
 
                 
         def set_exp_gain_value(self) -> None:
-                exp = random.randint(10,15)
+                exp = random.randint(2,6)
                 self.worth_exp = exp
                 
 
@@ -150,7 +151,41 @@ class Wizard(FillerClass):
                 self.con = random.randint(5,8)
                 
         def set_exp_gain_value(self) -> None:
-                exp = random.randint(10,15)
+                exp = random.randint(2,6)
+                self.worth_exp = exp
+
+class Wolf(FillerClass):
+        def __init__(self,*args, **kwargs):
+                super().__init__(*args, **kwargs)
+                self.worth_exp = 0
+                self.name = self.__class__.__name__
+
+        def base_stats_random(self):
+                self.str = random.randint(3,10)
+                self.agi = random.randint(3,14)
+                self.int = random.randint(3,8)
+                self.wis = random.randint(3,6)
+                self.con = random.randint(3,8)
+
+        def set_exp_gain_value(self) -> None:
+                exp = random.randint(1,4)
+                self.worth_exp = exp
+
+class Lizard(FillerClass):
+        def __init__(self,*args, **kwargs):
+                super().__init__(*args, **kwargs)
+                self.worth_exp = 0
+                self.name = self.__class__.__name__
+
+        def base_stats_random(self):
+                self.str = random.randint(3,10)
+                self.agi = random.randint(3,14)
+                self.int = random.randint(3,8)
+                self.wis = random.randint(3,6)
+                self.con = random.randint(3,8)
+
+        def set_exp_gain_value(self) -> None:
+                exp = random.randint(1,4)
                 self.worth_exp = exp
                 
     
