@@ -220,3 +220,117 @@ button:hover {
     padding: 10px; /* Reduced padding */
     max-width: 500px; /* Slightly smaller max-width */
 }
+
+.message-container {
+    background-color: rgba(34, 30, 30, 0.8);
+    color: white;
+    padding: 10px;
+    margin-top: 2px;
+    border-radius: 10px;
+    min-height: 200px; /* Adjust as needed */
+    font-size: 18px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    text-align: center;
+    line-height: 0.5; /* Adjust this value to change spacing */
+}
+
+.message {
+    color: white; /* Default text color */
+}
+
+.hero-damage {
+    color: green; /* Hero takes damage, red text */
+}
+
+.enemy-damage {
+    color: red; /* Enemy takes damage, green text */
+}
+.enemy-dead {
+    color: rgb(43, 8, 8); /* Enemy takes damage, green text */
+}
+.lvl-up {
+    color: rgb(26, 36, 149); /* Hero Healed by lvlong up */
+}
+
+/* Modal styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-checkbox:checked ~ .modal-overlay {
+    display: flex;
+}
+
+.modal-content {
+    background: #222;
+    color: #fff;
+    padding: 40px 20px 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    position: relative; /* Enable positioning of children */
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-close-button {
+    background-color: #444;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    position: absolute; /* Position it relative to modal-content */
+    top: 10px; /* Position from the top */
+    right: 10px; /* Position from the right */
+    margin: 0; /* Reset margin */
+    z-index: 1; /* Ensure it stays on top */
+    
+}
+
+.modal-button {
+    background-color: #444;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px; /* Ensure there's enough space above */
+}
+
+.modal-button:hover, .modal-close-button:hover {
+    background-color: #666;
+}
+
+/* Hide the checkbox used for modal toggle */
+.modal-checkbox {
+    display: none;
+}
+
+.vertical-form-container {
+    display: flex;                /* Use flexbox for layout */
+    flex-direction: column;       /* Arrange children in a column */
+    align-items: center;          /* Center items horizontally */
+    gap: 10px;                   /* Add space between each form element */
+    width: 100%;                 /* Make sure it takes full width of the modal */
+}
+
+.vertical-form label {
+    font-weight: bold;       /* Make the labels bold */
+}
+
+.form-group {
+    display: flex;            /* Use flexbox for layout */
+    align-items: center;      /* Center items vertically */
+    gap: 10px;               /* Space between label and input */
+    width: 100%;             /* Ensure it takes full width */
+}
