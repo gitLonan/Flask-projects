@@ -1,4 +1,4 @@
-from app.enemies.Class_for_enemies_zone1 import Bandit, Peasant, Knight, Wizard
+from app.enemies.Class_for_enemies_zone1 import Bandit, Peasant, Knight, Wizard, Wolf, Lizard
 import random
 
 from app.enemies.enemy_id_storage import Id
@@ -13,9 +13,11 @@ class CreatGetEnemy():
 
         self.ZONE = {"zone_1": {"Bandit": Bandit,
                              "Peasant":Peasant,
+                             "Wolf": Wolf,
+                             "Lizard": Lizard,
                              "Knight":Knight,
                              "Wizard":Wizard,},
-                    "zone_2": {},
+                    "zone_2": {},  
                     "zone_3": {},
         }
     def create_enemy_instance(self, enemy_name: str, current_zone: str, *args, **kwargs) -> object:

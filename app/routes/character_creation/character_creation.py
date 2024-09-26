@@ -164,6 +164,7 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
                                     icon = character.selected_icon,
                                     level = 1,
                                     class_name = character.selected_class_string,
+                                    stats_points = 0,
                                     #BASE STATS
                                     stats_STR = character.str,
                                     stats_AGI = character.agi,

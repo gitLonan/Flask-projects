@@ -5,6 +5,7 @@ from flask import current_app, session
 from app import battlefield, getEnemy, character
 from app import db
 from app.battle.settingUpBattle import SettingUpBattle
+from app.battle.battlefield import Message
 
 def init_routes(bp_zone_1):
     """ Outer func is needed for importing into local __init__ file soo I can app.register_blueprint in the main __init__
@@ -58,14 +59,26 @@ def init_routes(bp_zone_1):
 
             'magical_attack': character.magical_attack,
             'magical_defense': character.magical_defense,
-            
+
+            "str": character.str,
+            "int":character.int,
+            "agi":character.agi,
+            "wis":character.wis,
+            "con":character.con,
             'exp': character.current_exp,
-            'next_level_exp': 100, #this needs work
+            'next_level_exp': character.exp_for_lvl,
+            'lvl': character.lvl,
+            'stats_points': character.stats_points,
             'icon': character.selected_icon,
+
             "current_zone": character.current_zone,
             "current_zone_encounter": character.current_zone_encounter
         }
-        return render_template('battle_simulation.html', character=char, enemies=enemy_in_battle, selected_enemy=selected_enemy)
+        print(Message.message)
+        return render_template('battle_simulation.html', character=char, 
+                                enemies=enemy_in_battle, 
+                                selected_enemy=selected_enemy, 
+                                messages = Message.message )
         
     @bp_zone_1.route("/selected_enemy", methods=["POST", "GET"])
     def selected_enemy():
@@ -75,8 +88,6 @@ def init_routes(bp_zone_1):
             battlefield.selected_enemy = ""
             enemy_selected = request.form.get("enemy_id")
             battlefield.selected_enemy_id = int(enemy_selected)
-
-            #entity_for_attacking = battlefield.whos_turn_it_is()
             return redirect(url_for("zone_1.random_encounter"))
  
         
@@ -92,4 +103,23 @@ def init_routes(bp_zone_1):
                 break
         character.attack_type = "physical attack"
         battlefield.checking_type_attack(current_enemy_object, character.attack_type, db)
+        return redirect(url_for("zone_1.random_encounter"))
+
+    @bp_zone_1.route("/allocate_stats", methods=["POST", "GET"])
+    def allocate_stats():
+        stat_str = int(request.form.get('str'))
+        stat_agi = int(request.form.get('agi'))
+        stat_int = int(request.form.get('int'))
+        stat_con = int(request.form.get('con'))
+        stat_wis = int(request.form.get('wis'))
+
+        character.str = stat_str
+        character.agi = stat_agi
+        character.int = stat_int
+        character.con = stat_con
+        character.wis = stat_wis
+        character.update_derived_stats()
+
+        print("RADI",stat_str)
+        character.stats_points -= 1
         return redirect(url_for("zone_1.random_encounter"))

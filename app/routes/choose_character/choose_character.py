@@ -39,6 +39,7 @@ def init_routes(blueprint_bp, db) -> None:
             print("Pre loadera",character.physical_attack)
             LoadingDB.loading_in_info(chosen_char, db)
             print("Posle loadera",character.physical_attack)
+            character.next_lvl_exp()
             
             if playable_characters == []:
                 return redirect(url_for("routess.main_screen"))

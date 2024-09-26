@@ -1,6 +1,7 @@
 from flask import current_app
 from app.character_models import CharacterClass
 from app import getEnemy, battlefield
+from app.text.combat_related_text.combat_text import CombatText
 
 class SettingUpBattle():
     """ Adds character and its enemies depending on the current zone of that said character """
@@ -26,7 +27,7 @@ class SettingUpBattle():
                 battlefield.char_and_enemies_in_battle[character_name] = []
                 
             if battlefield.char_and_enemies_in_battle[character_name] == []:
-                    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+                    CombatText.message = []
                     battlefield.battle_already_ready = False
                     enemy_in_battle = getEnemy.get_enemy_or_enemies(character.current_zone)
                     battlefield.index = 0
