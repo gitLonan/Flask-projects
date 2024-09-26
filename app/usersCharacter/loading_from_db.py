@@ -1,4 +1,3 @@
-from app import create_class_instance
 from app import character
 import sqlalchemy as sa
 from app.character_models import CharacterClass
@@ -21,7 +20,7 @@ class LoadingDB():
         character.medium_coefficient = 0.7
         character.lower_coefficient = 0.3
 
-        #Character creation
+        ### Character creation
         character.name = loader.name
         character.class_name = loader.class_name
         character.description = loader.description
@@ -31,10 +30,10 @@ class LoadingDB():
         #character.session_remembering = {}
         #character.cookie = 1
 
-        #Battle
+        ### Battle
         character.type_of_attack = ''
 
-        #Derived stats
+        ### Derived stats
         character.physical_attack = loader.physical_attack
         character.physical_defense = loader.physical_defense
         character.speed = loader.speed
@@ -48,3 +47,5 @@ class LoadingDB():
         character.current_zone = loader.current_zone
         character.current_zone_encounter = loader.current_zone_encounter
         character.current_exp = loader.current_exp
+        character.lvl = loader.level
+        character.stats_points = loader.stats_points
