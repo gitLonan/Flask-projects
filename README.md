@@ -17,8 +17,11 @@ Game is currently in it's infancy and currently you can only play it on local ho
 1. **Cretaing character**  
    * During character creation your stats are randomized **based on the difficulty** you chose(normal is default), you can reroll as many times as you want and invest your stats points which is very important because to **choose** a class you have to pass certain stats tresh hold 
    ![Alt Text](/screenshots_for_README/char-creation-stats.JPG)    
-   ![Character Selection Screen](/screenshots_for_README/char-creation-characters.JPG)
-2. **Fighting**  
+   ![Character Selection Screen](/screenshots_for_README/char-creation-characters.JPG)  
+2. **Choosing Character**  
+   * Here you can choose or delete a character, on the screenshot below it looks like the screen cuts the third character but thats just overflowing feature of scroll.
+   ![Alt Text](/screenshots_for_README/character%20selection.JPG)  
+3. **Fighting**  
    * When fighting, a character with the **higher speed** movies first and on your turn you can choose who you are attacking and when you kill enough of them you get to lvl up and spend points to increase stats. Furthermore, you can see in the **combat report** below what happend this turn.  
    ![Alt Text](/screenshots_for_README/char%20fighting.JPG)  
    ![Alt Text](/screenshots_for_README/combat%20text.JPG)
