@@ -16,8 +16,8 @@ Before getting access to the game there is couple of things you should do:
 3. **Activate virtual environment**
    * Windows(PowerShell) - `venv\Scripts\Activate.ps1`
    * Windows (CMD) - `virtual\Scripts\activate.bat`
-   * macOS/Linux - virtual/bin/activate
-4. **Run dependencies.sh file**
+   * macOS/Linux - `virtual/bin/activate`
+4. **Run dependencies.sh file**  
    If by any chance it doesn't work you can install all of these on their own, just make sure you are inside of the virtual environment: 
       * `pip install flask`
       * `pip install "flask<3" "werkzeug<3"`
