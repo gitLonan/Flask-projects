@@ -9,7 +9,7 @@ Game is currently in it's infancy and currently you can only play it on local ho
 ## Features  
 1. **Cretaing character**  
    * During character creation your stats are randomized, you can reroll as many times as you want and invest your stats points which is very important because to **choose** a class you have to pass certain stats tresh hold 
-   ![Alt Text](/screenshots_for_README/char-creation-stats.JPG)  
+   ![Alt Text](/screenshots_for_README/char-creation-stats.JPG)    
    ![Alt Text](/screenshots_for_README/char-creation-characters.JPG)
 
 ## Table of Contents
