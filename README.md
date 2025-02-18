@@ -15,7 +15,7 @@ Game is currently in it's infancy and currently you can only play it on local ho
 
 ## Features  
 1. **Cretaing character**  
-   * During character creation your stats are randomized **based on the difficulty** you chose(normal is default), you can reroll as many times as you want and invest your stats points which is very important because to **choose** a class you have to pass certain stats tresh hold for example if you want to be Druid you should have at least**str**: 12 and **int**: 12.
+   * During character creation your stats are randomized **based on the difficulty** you chose(normal is default), you can reroll as many times as you want and invest your stats points which is very important because to **choose** a class you have to pass certain stats tresh hold for example if you want to be Druid you should have at least **str**: 12 and **int**: 12.  
    ![Alt Text](/screenshots_for_README/char-creation-stats.JPG)    
    ![Character Selection Screen](/screenshots_for_README/char-creation-characters.JPG)  
 2. **Choosing Character**  
