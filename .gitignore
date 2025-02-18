@@ -4,6 +4,7 @@ razmisljanja.txt
 config.py
 .coverage
 virtual
+.vscode
 
 *.pyc
 
