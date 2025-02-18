@@ -14,10 +14,6 @@ virtual
 # IDE files
 .vscode
 
-# Migration files
-for migration
-migrations
-
 # Python cache files
 *.pyc
 __pycache__/
