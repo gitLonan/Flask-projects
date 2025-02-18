@@ -6,6 +6,7 @@ config.py
 virtual
 .vscode
 for migration
+migrations
 *.pyc
 
 __pycache__/
