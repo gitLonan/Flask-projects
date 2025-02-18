@@ -3,7 +3,6 @@
 ## Table of Contents
 - [Goal of the project](#goal-of-the-project)
 - [Features](#features)
-- [Screenshots](#screenshots)
 - [Getting Started](#getting-started)
 - [Technologies used](#technologies-used)
 
