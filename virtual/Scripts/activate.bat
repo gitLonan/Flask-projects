@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\SVEE\Programi\Python skripte\Flask\choose_warrior\virtual
+set VIRTUAL_ENV=C:\SVEE\Programi\Python skripte\Flask\TurnBase RPG\virtual
 
 if not defined PROMPT set PROMPT=$P$G
 

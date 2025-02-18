@@ -119,7 +119,6 @@ def init_routes(bp_zone_1):
         character.con = stat_con
         character.wis = stat_wis
         character.update_derived_stats()
-
-        print("RADI",stat_str)
+        
         character.stats_points -= 1
         return redirect(url_for("zone_1.random_encounter"))

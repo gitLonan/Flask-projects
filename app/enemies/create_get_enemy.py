@@ -46,7 +46,7 @@ class CreatGetEnemy():
                     list[enemies created for battle]: instances of classes that represent enemies 
             """
             self.enemies_in_combat = []
-            num_of_enemies = random.randint(2,3)
+            num_of_enemies = random.randint(1,2)
             for i in range(num_of_enemies):  
                 rand_enemy_str = random.choice(list(self.ZONE[current_zone]))
                 rand_enemy_object = self.create_enemy_instance(rand_enemy_str,current_zone)

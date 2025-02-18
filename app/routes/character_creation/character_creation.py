@@ -76,12 +76,12 @@ def init_routes(blueprint_bp, character, db, stats, non_combat_text, treshold, c
         if request.method == "POST" and request.form.get('class'):
             character.selected_class_string = request.form.get('class', default="")
             if character.selected_class_string in character.session_remembering:
-                character.cookie = 1
+                character.class_stats_specifi_token = 1
                 character.update_stats(stats)
                 selected_class_object = character.session_remembering[character.selected_class_string]
                 selected_class_object.add_class_specific_stats(character)
             else:
-                character.cookie = 1
+                character.class_stats_specifi_token = 1
                 #This is where selected_class_objects goes from being Character class to instance of a specific class you chose
                 selected_class_object = create_class_instance(character.selected_class_string, stats.STRENGTH, stats.AGILITY, stats.INTELLIGENCE, stats.WISDOM, stats.CONSTITUTION)
                 character.session_remembering[character.selected_class_string] = selected_class_object

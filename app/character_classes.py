@@ -25,8 +25,9 @@ class Character():
         self.selected_class_string = ""
         self.class_instance = None
         self.session_remembering = {}
-        self.cookie = 1
+        self.class_stats_specifi_token = 1
         
+        #Lvl-up things and exp 
         self.stats_points = 0
         self.lvl = 1
         self.exp_for_lvl = self.lvl**3
@@ -38,6 +39,7 @@ class Character():
         self.current_exp = 0
         self.amount_of_killed_enemies = 0
 
+        #Derived Stats
         self.physical_attack = 0
         self.physical_defense = 0
         self.speed = 0
@@ -96,10 +98,10 @@ class Knight(Character):
         self.class_name = self.__class__.__name__
 
     def add_class_specific_stats(self, character):
-        if character.cookie == 1:
+        if character.class_stats_specifi_token == 1:
             character.physical_defense += 20
             character.physical_attack += 10
-            character.cookie = 0
+            character.class_stats_specifi_token = 0
 
     def get_description(self):
         return self.description
@@ -113,9 +115,9 @@ class Rouge(Character):
         self.class_name = self.__class__.__name__
 
     def add_class_specific_stats(self, character):
-        if character.cookie == 1:
+        if character.class_stats_specifi_token == 1:
             character.speed += 10
-            character.cookie = 0
+            character.class_stats_specifi_token = 0
     
     def get_description(self):
         return self.description
@@ -129,10 +131,10 @@ class Druid(Character):
         self.class_name = self.__class__.__name__
 
     def add_class_specific_stats(self, character):
-        if character.cookie == 1:
+        if character.class_stats_specifi_token == 1:
             character.magical_attack += 20
             character.exp_rate += 0.1
-            character.cookie = 0
+            character.class_stats_specifi_token = 0
     
     def get_description(self):
         return self.description
@@ -145,10 +147,10 @@ class Mage(Character):
         self.class_name = self.__class__.__name__
 
     def add_class_specific_stats(self, character):
-        if character.cookie == 1:
+        if character.class_stats_specifi_token == 1:
             character.magical_attack += 25
             character.exp_rate += 0.1
-            character.cookie = 0
+            character.class_stats_specifi_token = 0
     
     def get_description(self):
         return self.description

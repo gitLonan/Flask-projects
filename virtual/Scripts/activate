@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\SVEE\Programi\Python skripte\Flask\choose_warrior\virtual"
+VIRTUAL_ENV="C:\SVEE\Programi\Python skripte\Flask\TurnBase RPG\virtual"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

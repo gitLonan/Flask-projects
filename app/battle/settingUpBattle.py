@@ -66,7 +66,7 @@ class SettingUpBattle():
             for i in check:
                 battlefield.battle_after_speed_check.append(i)
             battlefield.battle_already_ready = True
-            print("DA VIDIMO", battlefield.char_and_enemies_in_battle)
+            #print("DA VIDIMO", battlefield.char_and_enemies_in_battle)
             return 
     
     def soemthing(character):

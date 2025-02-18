@@ -3,7 +3,7 @@ razmisljanja.txt
 .flaskenv
 config.py
 .coverage
-
+virtual
 
 *.pyc
 

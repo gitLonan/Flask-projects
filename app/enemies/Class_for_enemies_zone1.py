@@ -94,7 +94,7 @@ class Bandit(FillerClass):
                 self.con = random.randint(3,8)
 
         def set_exp_gain_value(self) -> None:
-                exp = random.randint(1,4)
+                exp = random.randint(2,5)
                 self.worth_exp = exp
                 
                 
@@ -114,7 +114,7 @@ class Peasant(FillerClass):
                 self.con = random.randint(3,5)
                 
         def set_exp_gain_value(self) -> None:
-                exp = random.randint(1,3)
+                exp = random.randint(2,3)
                 self.worth_exp = exp
                 
 
@@ -133,7 +133,7 @@ class Knight(FillerClass):
 
                 
         def set_exp_gain_value(self) -> None:
-                exp = random.randint(2,6)
+                exp = random.randint(3,6)
                 self.worth_exp = exp
                 
 
@@ -168,7 +168,7 @@ class Wolf(FillerClass):
                 self.con = random.randint(3,8)
 
         def set_exp_gain_value(self) -> None:
-                exp = random.randint(1,4)
+                exp = random.randint(2,5)
                 self.worth_exp = exp
 
 class Lizard(FillerClass):
@@ -185,7 +185,7 @@ class Lizard(FillerClass):
                 self.con = random.randint(3,8)
 
         def set_exp_gain_value(self) -> None:
-                exp = random.randint(1,4)
+                exp = random.randint(2,4)
                 self.worth_exp = exp
                 
     
