@@ -1,18 +1,26 @@
+#Me Stuff
 DEV LOG.txt
 razmisljanja.txt
+
+#Config files
 .flaskenv
 config.py
 .coverage
+
+# Environment variables
 virtual
+
+# IDE files
 .vscode
+
+# Migration files
 for migration
 migrations
+
+# Python cache files
 *.pyc
-
 __pycache__/
-
 *.py[cod]
 *$py.class
 .pyc
-
 .pytest_cache
