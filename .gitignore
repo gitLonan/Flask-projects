@@ -5,7 +5,7 @@ config.py
 .coverage
 virtual
 .vscode
-
+for migration
 *.pyc
 
 __pycache__/
